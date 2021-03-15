@@ -27,6 +27,7 @@ namespace amb_002_backend.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
+            Console.WriteLine("Hola mundo");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
