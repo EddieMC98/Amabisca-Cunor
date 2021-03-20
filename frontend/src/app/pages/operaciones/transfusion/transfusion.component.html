@@ -1,0 +1,26 @@
+<div class="row">
+    <toaster-container [toasterconfig]="config"></toaster-container>
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-header>
+          Registro de Solicitudes de Transfusión
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row show-grid">
+              
+              <div class="col-md-3">
+                  <a routerLink="/pages/operaciones/transfusion/nuevo"><button class="btn btn-sm btn-success" ><i class="fa fa-plus"></i> Nuevo registro</button></a>
+              </div>
+              <div class="col-md-4"><input #search class="search form-control input-sm" type="text" placeholder="Búscar..." (keydown.enter)="onSearch(search.value)"></div>
+              <div class="col-md-5"></div>
+              
+              <div class="col-md-12">
+                  <br>
+                  <ng2-smart-table [settings]="settings" [source]="source" (edit)="editarRegistro($event)" (delete)="eliminarRegistro($event)">
+                  </ng2-smart-table>
+              </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+</div>

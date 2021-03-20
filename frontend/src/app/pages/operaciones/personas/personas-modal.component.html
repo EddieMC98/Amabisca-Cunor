@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+        <div class="form-group"> 
+                <label for="dpi" class="col-sm-3 control-label">DPI:</label> 
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <input type="hidden" id="cod_persona" [(ngModel)]="item.cod_persona">
+                        <input type="text" class="form-control" maxlength="13" id="dpi" name="dpi" [(ngModel)]="item.dpi"> 
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label for="nombres" class="col-sm-3 control-label">Nombres:</label> 
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <input type="hidden" id="cod_persona" [(ngModel)]="item.cod_persona">
+                        <input type="text" class="form-control" id="nombres" name="nombres" [(ngModel)]="item.nombres"> 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group"> 
+                <label for="apellidos" class="col-sm-3 control-label">Apellidos:</label> 
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <input type="hidden" id="cod_persona" [(ngModel)]="item.cod_persona">
+                        <input type="text" class="form-control" id="apellidos" name="apellidos" [(ngModel)]="item.apellidos"> 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group"> 
+                <label for="cod_tipo_sangre" class="col-sm-3 control-label">Tipo de Sangre:</label> 
+                <div class="col-sm-9"> 
+                    <div class="input-group input-group-sm">
+                        <select class="form-control ctrl-lst" id="cod_tipo_sangre" name="cod_tipo_sangre" [(ngModel)]="item.cod_tipo_sangre">
+                            <option *ngFor="let item of lstTipoSangre" value= {{item.cod_tipo_sangre}}>{{item.nombre}}{{item.grupo}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label for="sexo" class="col-sm-3 control-label">Sexo:</label> 
+                <div class="col-sm-9"> 
+                    <div class="input-group input-group-sm">
+                        <select class="form-control ctrl-lst" id="sexo" name="sexo" [(ngModel)]="item.sexo">
+                            <option value="F">Femenino</option>
+                            <option value="M">Masculino</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label for="cod_grupo_etnico" class="col-sm-3 control-label">Grupo Étnico:</label> 
+                <div class="col-sm-9"> 
+                    <div class="input-group input-group-sm">
+                        <select class="form-control ctrl-lst" id="cod_grupo_etnico" name="cod_grupo_etnico" [(ngModel)]="item.cod_grupo_etnico">
+                            <option *ngFor="let item of lstGrupoEtnico" value= {{item.cod_grupo_etnico}}>{{item.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" (click)="guardar()">Guardar</button>
+    <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
