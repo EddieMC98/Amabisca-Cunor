@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+    <div class="form-group"> 
+        <label for="cantidad" class="col-sm-3 control-label">Cantidad:</label> 
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <input type="hidden" id="cod_trans_no_util" [(ngModel)]="item.cod_trans_no_util">
+                <input type="text" class="form-control" id="cantidad" name="cantidad" required [(ngModel)]="item.cantidad"> 
+            </div>
+        </div>
+    </div>
+    <div class="form-group"> 
+        <label for="cod_tipo_sangre" class="col-sm-3 control-label">Tipo de Sangre:</label> 
+        <div class="col-sm-9"> 
+            <div class="input-group input-group-sm">
+                <select class="form-control" id="cod_tipo_sangre" name="cod_tipo_sangre" [(ngModel)]="item.cod_tipo_sangre">
+                    <option *ngFor="let item of lstTipoSangre" value= {{item.cod_tipo_sangre}}>{{item.nombre}} {{item.grupo}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group"> 
+        <label for="fec_creacion" class="col-sm-3 control-label">Fecha:</label> 
+        <div class="col-sm-9 input-group input-group-sm"> 
+                <input class="form-control" placeholder="dd/mm/yyyy" format="dd/MM/yyyy" name="fec_creacion" [(ngModel)]="fec_creacion" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" (click)="guardar()">Guardar</button>
+    <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>

@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+    <div class="form-group"> 
+        <label for="cod_componente" class="col-sm-3 control-label">Tipo de Componente:</label> 
+        <div class="col-sm-9"> 
+            <div class="input-group input-group-sm">
+                <select class="form-control" id="cod_componente" name="cod_componente" [(ngModel)]="item.cod_componente">
+                    <option *ngFor="let item of lstComponentes" value= {{item.cod_componente}}>{{item.nombre}}</option>
+                </select>        
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group"> 
+        <label for="cantidad" class="col-sm-3 control-label">Unidades descartadas:</label> 
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <input type="hidden" id="cod_uni_desc" [(ngModel)]="item.cod_uni_desc">
+                <input type="text" class="form-control" id="cantidad" name="cantidad" required [(ngModel)]="item.cantidad"> 
+            </div>
+        </div>
+    </div>
+    <div class="form-group"> 
+        <label for="cod_descarte" class="col-sm-3 control-label">Tipo de descarte:</label> 
+        <div class="col-sm-9"> 
+            <div class="input-group input-group-sm">
+                <select class="form-control" id="cod_descarte" name="cod_descarte" [(ngModel)]="item.cod_descarte">
+                    <option *ngFor="let item of lstDescartes" value= {{item.cod_descarte}}>{{item.nombre}}</option>
+                </select>        
+            </div>
+        </div>
+    </div>
+    <div class="form-group"> 
+        <label for="fec_creacion" class="col-sm-3 control-label">Fecha:</label> 
+        <div class="col-sm-9 input-group input-group-sm"> 
+            <input class="form-control" placeholder="dd/mm/yyyy" format="dd/MM/yyyy" name="fec_creacion" [(ngModel)]="fec_creacion" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" (click)="guardar()">Guardar</button>
+    <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>

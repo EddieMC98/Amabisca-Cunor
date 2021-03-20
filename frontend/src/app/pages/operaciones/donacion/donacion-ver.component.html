@@ -1,0 +1,209 @@
+<div class="row">
+        <toaster-container [toasterconfig]="config"></toaster-container>
+        <div class="col-md-12">
+            <nb-card>
+            <nb-card-header>
+                Ver Donación
+            </nb-card-header>
+            <nb-card-body>
+
+                    <nb-tabset fullWidth>
+                        <nb-tab tabTitle="Información de Donación">
+                            <br>
+                            <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group"> 
+                                            <label for="fec_donacion" class="col-sm-12 control-label">Fecha de Donación:</label> 
+                                            <div class="col-sm-12 input-group input-group-sm"> 
+                                                <input class="form-control" placeholder="dd/mm/yyyy" format="dd/MM/yyyy" name="fec_donacion" [(ngModel)]="fec_donacion" ngbDatepicker #d="ngbDatepicker">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-sm btn-outline-secondary" (click)="d.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="form-group col-md-6"> 
+                                        <label for="no_donacion" class="col-sm-12 control-label">No. de Donación:</label> 
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" readonly class="form-control" id="no_donacion" name="no_donacion" [(ngModel)]="item.no_donacion"> 
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="form-group col-md-6"> 
+                                        <label for="cantidad" class="col-sm-12 control-label">Donador:</label> 
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-sm">
+                                                <input type="hidden" id="cod_donacion" [(ngModel)]="item.cod_donacion">
+                                                <input type="hidden" class="form-control" id="cod_persona_donador" name="cod_persona_donador" [(ngModel)]="item.cod_persona_donador">
+                                                <input type="text" class="form-control" readonly id="nom_donador" name="nom_donador" [(ngModel)]="nom_donador">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-info" (click)="busqPersona(1)">Buscar Donador</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    
+                    
+                                    <div class="form-group col-md-6"> 
+                                        <label for="cantidad" class="col-sm-12 control-label">Receptor:</label> 
+                                        <div class="col-sm-12"> 
+                                            <div class="input-group input-group-sm">
+                                                <input type="hidden" class="form-control" id="cod_persona_receptor" name="cod_persona_receptor" [(ngModel)]="item.cod_persona_receptor"> 
+                                                <input type="text" class="form-control" readonly id="nom_receptor" name="nom_receptor" [(ngModel)]="nom_receptor">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-info" (click)="busqPersona(2)">Buscar Receptor</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group col-md-4"> 
+                                        <label for="cod_tipo_donacion" class="col-sm-12 control-label">Tipo de Donación:</label> 
+                                        <div class="col-sm-12"> 
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control ctrl-lst" id="cod_tipo_donacion" name="cod_tipo_donacion" [(ngModel)]="item.cod_tipo_donacion">
+                                                    <option *ngFor="let item2 of lstTipoDonacion" value= {{item2.cod_tipo_donacion}}>{{item2.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="form-group col-md-6"> 
+                                        <label for="barcode" class="col-sm-12 control-label">Código de barras:</label> 
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" class="form-control" id="barcode" name="barcode" [(ngModel)]="item.barcode"> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-4"> 
+                                        <label for="cod_estado" class="col-sm-12 control-label">Estado de la donación:</label> 
+                                        <div class="col-sm-12"> 
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control ctrl-lst" id="cod_estado" name="cod_estado" [(ngModel)]="item.cod_estado" (change)="cambioEstado()">
+                                                        <option *ngFor="let item2 of lstEstados" value= {{item2.cod_estado}}>{{item2.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="form-group col-md-4"> 
+                                        <label for="serologia" class="col-sm-12 control-label">Guardar pruebas de serologia:</label> 
+                                        <div class="col-sm-12"> 
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control ctrl-lst" id="serologia" name="serologia" [(ngModel)]="item.serologia">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Si</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12">
+                                        <br>
+                                        <div class="col-sm-12">
+                                            <legend>{{tit_motivo_donacion}}</legend>
+                                            <table class="table table-bordered table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Motivo</th>
+                                                        <th>Seleccione motivos</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let itmTipo of item.donacion_motivo; let i = index">
+                                                        <td class="td_col"> {{itmTipo.nombre}}</td>
+                                                        <td class="td_col">
+                                                            <input type="hidden" value = "{{item.donacion_motivo[i].cod_donacion_motivo}}" [(ngModel)]="item.donacion_motivo[i].cod_donacion_motivo">
+                                                            <input type="hidden" value = "{{item.donacion_motivo[i].cod_tipo_motivo}}" [(ngModel)]="item.donacion_motivo[i].cod_tipo_motivo">
+                                                            <input type="checkbox" [(ngModel)]="item.donacion_motivo[i].estado">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            
+                        </nb-tab>
+                        <nb-tab tabTitle="Pruebas de Predonación">
+                            <br>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Nombre de Prueba</th>
+                                                <th>Seleccione pruebas realizadas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let itmTipo of item.det_prueba_predonacion; let i = index">
+                                                <td class="td_col"> {{itmTipo.cod_predonacion}}</td>
+                                                <td class="td_col"> {{lstTipoPredonacion[itmTipo.cod_predonacion-1].nombre}}</td>
+                                                <td class="td_col">
+                                                    <input type="hidden" value = "{{item.det_prueba_predonacion[i].cod_detalle}}" [(ngModel)]="item.det_prueba_predonacion[i].cod_predonacion">
+                                                    <input type="hidden" value = "{{item.det_prueba_predonacion[i].cod_predonacion}}" [(ngModel)]="item.det_prueba_predonacion[i].cod_predonacion">
+                                                    <input type="checkbox" [(ngModel)]="item.det_prueba_predonacion[i].estado">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group col-md-6"> 
+                                <label for="otro_predonacion" class="col-sm-12 control-label">Otro (Predonación):</label> 
+                                <div class="col-sm-12">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" id="otro_predonacion" name="otro_predonacion" [(ngModel)]="item.otro_predonacion"> 
+                                    </div>
+                                </div>
+                            </div> 
+                        </nb-tab>
+                        <nb-tab tabTitle="Registrar Pruebas de Serología">
+                            <div *ngFor="let itResPrueba of item.res_prueba_serologia; let i1 = index">
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Prueba de Serología</th>
+                                            <th>Resultado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let itmTipo of itResPrueba.det_res_prueba; let i2 = index">
+                                            <td>
+                                                {{itmTipo.nom_serologia}}
+                                            </td>
+                                            <td>
+                                                <select class="form-control" [(ngModel)]="item.res_prueba_serologia[i1].det_res_prueba[i2].cod_tipo_res_serologia">
+                                                        <option *ngFor="let item2 of lstTipoResSerologia" value= {{item2.cod_tipo_res_serologia}}>{{item2.nombre}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        </nb-tab>
+                    </nb-tabset>
+
+                
+            </nb-card-body>
+            <nb-card-footer>
+                <button class="btn btn-sm btn-primary" (click)="guardar()">Guardar</button>
+                <button class="btn btn-sm btn-danger" (click)="closeModal()">Cancelar</button>
+            </nb-card-footer>
+        </nb-card>
+    </div>

@@ -1,0 +1,48 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  pg_api_10:
+    image: postgres:10-alpine
+    restart: always
+    container_name: pg_api_10
+    hostname: pg_api_10
+    environment:
+      POSTGRES_PASSWORD: QRdffq4312
+      TZ: 'America/Guatemala'
+      PGTZ: 'America/Guatemala'
+    ports:
+      - 5434:5432
+    networks:
+            - testing_net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: pgadmin4_devel
+    hostname: pgadmin4_devel
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: test@test.com
+      PGADMIN_DEFAULT_PASSWORD: 12345678
+    ports:
+      - 8082:80
+    networks:
+            - testing_net
+
+  consul.sd:
+    image: consul
+    container_name: consul.sd
+    hostname: "consul.sd"
+    ports:
+        - "8500:8500"
+    networks:
+        testing_net:
+            ipv4_address: 172.28.1.2
+
+networks:
+    testing_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.0.0/16

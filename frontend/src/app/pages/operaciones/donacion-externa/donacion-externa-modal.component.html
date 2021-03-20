@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+    <div class="form-group"> 
+        <label for="cantidad" class="col-sm-3 control-label">Lugar:</label> 
+        <div class="col-sm-9"> 
+            <input type="hidden" id="cod_unidad_ext" [(ngModel)]="item.cod_unidad_ext">
+            <input type="text" class="form-control" id="lugar" name="lugar" required [(ngModel)]="item.lugar"> 
+        </div>
+    </div>
+    <div class="form-group"> 
+        <label for="fec_creacion" class="col-sm-3 control-label">Fecha:</label> 
+        <div class="col-sm-9 input-group input-group-sm"> 
+                <input class="form-control" placeholder="dd/mm/yyyy" format="dd/MM/yyyy" name="fec_creacion" [(ngModel)]="fec_creacion" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+        </div>
+    </div>
+
+    <div class="form-group"> 
+        <label for="cantidad" class="col-sm-3 control-label">Donantes atendidos:</label> 
+        <div class="col-sm-9"> 
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" id="cantidad" name="cantidad" required [(ngModel)]="item.cantidad"> 
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group"> 
+        <label for="cantidad" class="col-sm-3 control-label">Unidades colectadas:</label> 
+        <div class="col-sm-9"> 
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" id="cantidad" name="cantidad" required [(ngModel)]="item.cantidad"> 
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group"> 
+        <label for="cantidad" class="col-sm-3 control-label">Observaciones:</label> 
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <textarea class="form-control" name="observaciones" [(ngModel)]="item.observaciones" cols="10" rows="6" maxlength="150"></textarea>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" (click)="guardar()">Guardar</button>
+    <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
