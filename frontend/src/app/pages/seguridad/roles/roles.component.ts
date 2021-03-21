@@ -25,7 +25,7 @@ export class RolesComponent {
   modalRef: NgbModalRef;
 
   config: ToasterConfig;
-  
+
     position = 'toast-top-right';
     animationType = 'fade';
     timeout = 5000;
@@ -38,17 +38,15 @@ export class RolesComponent {
     actions : {
         position : 'right',
         add:false,
+        delete:false,
         columnTitle: "Acciones",
         custom: [
-          
+
         ]
     },
     edit:  {
       confirmSave: true,
-      editButtonContent: '<i class="fa fa-eye"></i>',
-    },
-      delete:  {
-        deleteButtonContent: '<i class="fa fa-lock"></i>'
+      editButtonContent: '<i class="fas fa-user-lock"></i>',
     },
     columns: {
       cod_rol: {
@@ -82,10 +80,10 @@ export class RolesComponent {
       err => {
         console.log(err);
       }
- 
+
     );
   }
-  
+
   onSearch(query: string = '') {
     console.log(query);
     this.source.setFilter([
@@ -94,7 +92,7 @@ export class RolesComponent {
         field: 'nombre',
         search: query
       },
-    ], false); 
+    ], false);
   }
 
   nuevoRegistro() {
@@ -110,7 +108,7 @@ export class RolesComponent {
       if (`${this.getDismissReason(reason)}` != "undefined"){
         this.showToast("error", "Error", `${this.getDismissReason(reason)}`);
       }
-      
+
       this.getAll();
     });
   }
@@ -139,12 +137,12 @@ export class RolesComponent {
         },
         () => {
 
-    });    
+    });
   }
 
   eliminarRegistro(value) {
     //value.data.cod_rol
-    this.router.navigate(['pages/seguridad/permisos', value.data.cod_rol]); 
+    this.router.navigate(['pages/seguridad/permisos', value.data.cod_rol]);
   }
 
   private getDismissReason(reason: any): string {

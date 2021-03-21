@@ -122,7 +122,8 @@ namespace backend.Controllers
         // POST: api/Usuarios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("register")]
         public async Task<ActionResult<Usuario>> nuevo(RegisterModel usuario)
         {
             if (string.IsNullOrWhiteSpace(usuario.contrasenia))
@@ -152,6 +153,45 @@ namespace backend.Controllers
             return CreatedAtAction("GetUsuarios", new { id = reg.cod_usuario }, reg);
         }
 
+        [AllowAnonymous]
+        [HttpPost("new-register")]
+        public async Task<ActionResult<Usuario>> newUser(Registro rm){
+
+            RegisterModel usuario = new RegisterModel();
+            usuario.nombre_completo=rm.fullName;
+            usuario.correo_electronico = rm.email;
+            usuario.contrasenia = rm.password;
+            usuario.estado=1;
+            usuario.cod_rol=3;
+            
+            if (string.IsNullOrWhiteSpace(usuario.contrasenia) || usuario.contrasenia != rm.confirmPassword)
+                return BadRequest();
+
+            if (_context.Usuario.Any(x => x.correo_electronico == usuario.correo_electronico))
+                return BadRequest();
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(usuario.contrasenia, out passwordHash, out passwordSalt);
+
+            Usuario reg = new Usuario();
+
+            reg.nombre_completo = usuario.nombre_completo;
+            reg.correo_electronico = usuario.correo_electronico;
+            reg.contrasenia = passwordHash;
+            reg.salt = passwordSalt;
+            reg.estado = usuario.estado;
+            reg.fec_creacion = DateTime.Now;
+            reg.cod_rol =  usuario.cod_rol;
+
+            _context.Usuario.Add(reg);
+
+            //_context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return Ok(reg);
+        }
+
+        
         private bool UsuariosExists(int id)
         {
             return _context.Usuario.Any(e => e.cod_usuario == id);

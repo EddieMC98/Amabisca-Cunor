@@ -26,19 +26,19 @@ export class PagesComponent {
   ngOnInit() {
     this.authService.onTokenChange()
     .subscribe((token: NbAuthJWTToken) => {
-      
+
       if (token) {
         var usr = this.parseJwt(token.getValue());
         var   menus = [];
         var inicio =  {
           title: 'Inicio',
-          icon: 'nb-home',
+          icon: 'nb-e-commerce',
           link: '/pages/dashboard',
           home: true,
         };
         menus.push(inicio);
 
-        
+
         var objMenu = JSON.parse(usr.menus);
         console.log(objMenu);
         for (var n = 0; n < objMenu.length; n++) {
@@ -47,7 +47,7 @@ export class PagesComponent {
             var children = {
               title : this.doReplace(objMenu[n].permisos[x].nombre),
               link : objMenu[n].permisos[x].enlace
-            }  
+            }
             childrens.push(children);
           }
           var NbMenuItem = {
@@ -81,7 +81,7 @@ parseJwt = function(token) {
  doReplace = function(str){
    if (str != null){
     var conversions = new Object();
-    
+
     conversions['á'] = '-a-';
     conversions['é'] = '-e-';
     conversions['í'] = '-i-';
@@ -92,7 +92,7 @@ parseJwt = function(token) {
     conversions['Í'] = '-I-';
     conversions['Ó'] = '-O-';
     conversions['Ú'] = '-U-';
-    
+
     for(var i in conversions){
         var re = new RegExp(conversions[i],"g");
         str = str.replace(re,i);

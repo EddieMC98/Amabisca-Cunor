@@ -33,7 +33,7 @@ const socialLinks = [
 ];
 
 const DATA_SERVICES = [
-  
+
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -63,19 +63,19 @@ export const NB_CORE_PROVIDERS = [
               success: '/',
               failure: null,
             },
-            defaultErrors: ['La combinación correo electrónico y contraseña no es correcta. Inténtelo de nuevo.'],
-            defaultMessages: ['Bienvenido al Sistema del Banco de Sangre.'],
+            defaultErrors: ['Datos Inválidos'],
+            defaultMessages: ['Bienvenido a AMABISCA'],
           },
           register: {
             alwaysFail: false,
-            endpoint: '/auth/register',
+            endpoint: 'usuarios/new-register',
             method: 'post',
             redirect: {
               success: '/',
               failure: null,
             },
-            defaultErrors: ['Something went wrong, please try again.'],
-            defaultMessages: ['You have been successfully registered.'],
+            defaultErrors: ['Ups algo salió mal, por favor intente de nuevo.'],
+            defaultMessages: ['Registro exitosos.'],
           },
           logout: {
             alwaysFail: false,

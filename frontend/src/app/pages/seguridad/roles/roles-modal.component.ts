@@ -11,10 +11,13 @@ export class RolesModalComponent {
   public item = new Rol();
   modalHeader: string;
   public esNuevo: Boolean = false;
-  
+
   constructor(private activeModal: NgbActiveModal, private service: RolService,) { }
 
   guardar() {
+
+    var y: number = +this.item.estado;
+    this.item.estado=y;
     if (this.esNuevo){
       this.service.guardar(this.item).subscribe(
               data => {

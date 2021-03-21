@@ -44,7 +44,7 @@ export class UsuariosComponent {
     },
     edit:  {
       confirmSave: true,
-      editButtonContent: '<i class="fa fa-eye"></i>',
+      editButtonContent: '<i class="fas fa-user-edit"></i>',
     },
 
     columns: {

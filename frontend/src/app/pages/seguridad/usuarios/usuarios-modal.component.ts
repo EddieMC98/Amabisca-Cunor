@@ -34,6 +34,9 @@ export class UsuariosModalComponent {
 
     var y: number = +this.item.cod_rol;
     this.item.cod_rol=y;
+
+    var z: number = +this.item.estado;
+    this.item.estado=z;
     if (this.esNuevo){
       this.service.guardar(this.item).subscribe(
               data => {

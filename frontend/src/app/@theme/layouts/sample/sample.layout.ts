@@ -25,11 +25,11 @@ import { StateService } from '../../../@core/utils';
                    tag="menu-sidebar"
                    responsive
                    [end]="sidebar.id === 'end'">
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
+        <!-- <nb-sidebar-header *ngIf="currentTheme !== 'default'">
           <a href="#" class="btn btn-hero-success main-btn">
             <i class="ion ion-social-github"></i> <span>Support Us</span>
           </a>
-        </nb-sidebar-header>
+        </nb-sidebar-header> -->
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 
