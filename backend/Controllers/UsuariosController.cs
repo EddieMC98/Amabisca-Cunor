@@ -77,17 +77,23 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> editar(int id, RegisterModel usuario)
         {
-            if (id != usuario.cod_usuario)
+            if (id != usuario.cod_usuario )
             {
                 return BadRequest();
             }
 
             Usuario reg = _context.Usuario.Find(usuario.cod_usuario);
-
+            if(reg.correo_electronico != usuario.correo_electronico){
+                if( _context.Usuario.Any(x => x.correo_electronico == usuario.correo_electronico)){
+                    return BadRequest();
+                }
+            }
             reg.nombre_completo = usuario.nombre_completo;
             reg.estado = usuario.estado;
             reg.fec_creacion = DateTime.Now;
             reg.cod_rol = usuario.cod_rol;
+            reg.correo_electronico= usuario.correo_electronico;
+            
 
             if (!string.IsNullOrWhiteSpace(usuario.contrasenia))
             {
