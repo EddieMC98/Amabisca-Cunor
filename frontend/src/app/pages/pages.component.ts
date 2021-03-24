@@ -32,7 +32,7 @@ export class PagesComponent {
         var   menus = [];
         var inicio =  {
           title: 'Inicio',
-          icon: 'nb-e-commerce',
+          icon: 'nb-home',
           link: '/pages/dashboard',
           home: true,
         };

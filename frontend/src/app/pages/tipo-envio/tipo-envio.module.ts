@@ -27,7 +27,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
-        TipoEnvioService
+        TipoEnvioService,
+        ToasterService,
   ],
   entryComponents: [
     TipoEnvioModalComponent,

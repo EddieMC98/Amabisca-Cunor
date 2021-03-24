@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 const routes: Routes = [{
   path: '',
@@ -12,20 +11,7 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
   },
-  {
-    path: 'configuracion',
-    component: ConfiguracionComponent,
-  },{
-    path: 'operaciones',
-    loadChildren: './operaciones/operaciones.module#OperacionesModule',
-  }, {
-    path: 'reportes',
-    loadChildren: './reportes/reportes.module#ReportesModule',
-  }
-  , {
-    path: 'catalogos',
-    loadChildren: './catalogos/catalogos.module#CatalogosModule',
-  }, {
+   {
     path: 'seguridad',
     loadChildren: './seguridad/seguridad.module#SeguridadModule',
   },
