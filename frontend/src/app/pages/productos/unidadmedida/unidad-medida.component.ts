@@ -1,27 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { LocalDataSource } from 'ng2-smart-table';
-import { CategoriaService } from '../../../@core/data/categoria.service';
-import { Rol} from '../../../@core/modelos/rol';
-import { Observable } from "rxjs/Observable";
-import { ViewCell } from 'ng2-smart-table';
-import { CategoriasModalComponent } from './categorias-modal.component';
-//import { RolesDialogComponent} from './roles-dialog.component';
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { DatePipe } from '@angular/common';
-import 'style-loader!angular2-toaster/toaster.css';
-import {Router} from "@angular/router";
-import { Categoria } from '../../../@core/modelos/categoria';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster';
+import { LocalDataSource } from 'ng2-smart-table';
+import { UnidadMedidaService } from '../../../@core/data/unidad-medida.service';
+import { UnidadMedida } from '../../../@core/modelos/unidad-medida';
+import { UnidadMedidaModalComponent } from './unidad-medida-modal.component';
+
 @Component({
-  selector: 'ngx-categoria',
-  templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.scss']
+  selector: 'ngx-unidad-medida',
+  templateUrl: './unidad-medida.component.html',
 })
-export class CategoriaComponent implements OnInit {
+
+export class UnidadMedidaComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
-  private items: Categoria[];
-  public item = new Categoria();
+  private items: UnidadMedida[];
+  public item = new UnidadMedida();
   modalRef: NgbModalRef;
 
   config: ToasterConfig;
@@ -31,7 +27,7 @@ export class CategoriaComponent implements OnInit {
     timeout = 5000;
     toastsLimit = 5;
 
-  constructor(private service: CategoriaService, private modalService: NgbModal, private toasterService: ToasterService, private datePipe: DatePipe, private router: Router) {  }
+  constructor(private service: UnidadMedidaService, private modalService: NgbModal, private toasterService: ToasterService, private datePipe: DatePipe, private router: Router) {  }
 
   settings = {
     mode : 'external',
@@ -49,12 +45,12 @@ export class CategoriaComponent implements OnInit {
       editButtonContent: '<i class="fas fa-user-edit"></i>',
     },
     columns: {
-      codCategoria: {
+      codUnidadMedida: {
         title: 'ID',
         type: 'number',
 
       },
-      nombreCategoria: {
+      nombreUnidadMedida: {
         title: 'Nombre',
         type: 'string',
 
@@ -82,7 +78,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   getAll() {
-    this.service.getCategorias().subscribe(
+    this.service.getUnidades().subscribe(
       items => {
         this.items = items;
         this.source.load(this.items);
@@ -99,17 +95,17 @@ export class CategoriaComponent implements OnInit {
     this.source.setFilter([
       // fields we want to include in the search
       {
-        field: 'nombreCategoria',
+        field: 'nombreUnidadMedida',
         search: query
       },
     ], false);
   }
 
   nuevoRegistro() {
-    this.modalRef = this.modalService.open(CategoriasModalComponent, { size: 'lg', container: 'nb-layout' });
+    this.modalRef = this.modalService.open(UnidadMedidaModalComponent, { size: 'lg', container: 'nb-layout' });
 
-    this.modalRef.componentInstance.modalHeader = 'Nueva Categoría';
-    this.modalRef.componentInstance.item = new Rol();
+    this.modalRef.componentInstance.modalHeader = 'Nueva Unidad de Medida';
+    this.modalRef.componentInstance.item = new UnidadMedida();
     this.modalRef.componentInstance.esNuevo = true;
     this.modalRef.result.then((data) => {
       this.showToast("info", "Guardar", data);
@@ -124,12 +120,12 @@ export class CategoriaComponent implements OnInit {
   }
 
   editarRegistro(value) {
-    this.modalRef = this.modalService.open(CategoriasModalComponent, { size: 'lg', container: 'nb-layout' });
+    this.modalRef = this.modalService.open(UnidadMedidaModalComponent, { size: 'lg', container: 'nb-layout' });
 
-    this.service.getCategoria(value.data.codCategoria)
+    this.service.getUnidad(value.data.codUnidadMedida)
         .subscribe(
         data => {
-            this.modalRef.componentInstance.modalHeader = 'Editar Categoria';
+            this.modalRef.componentInstance.modalHeader = 'Editar Unidad de Medida';
             this.modalRef.componentInstance.item = data;
             this.modalRef.componentInstance.esNuevo = false;
             this.modalRef.result.then((data) => {
@@ -152,7 +148,7 @@ export class CategoriaComponent implements OnInit {
 
    eliminarRegistro(value) {
      value.data.cod_rol
-     this.router.navigate(['pages/seguridad/permisos', value.data.cod_rol]);
+     this.router.navigate(['pages/seguridad/permisos', value.data.codUnidadMedida]);
    }
 
   private getDismissReason(reason: any): string {

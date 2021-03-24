@@ -12,7 +12,7 @@ namespace backend.Models
 
         public int CodUnidadMedida { get; set; }
         public string NombreUnidadMedida { get; set; }
-        public string EstadoActivo { get; set; }
+        public int EstadoActivo { get; set; }
 
         public virtual ICollection<TbProducto> TbProducto { get; set; }
     }

@@ -63,19 +63,29 @@ export class MarcaComponent implements OnInit {
       codMarca: {
         title: "ID",
         type: "number",
-        filter: false,
+
       },
       nombreMarca: {
         title: "Nombre",
         type: "string",
-        filter: false,
+
       },
       estadoActivo: {
         title: "Estado",
         valuePrepareFunction: (value) => {
           return value === 1 ? "Habilitado" : "No habilitado";
         },
-        filter: false,
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Estado',
+            list: [
+              { value: '0', title: 'Deshabilitado' },
+              { value: '1', title: 'Habilitado' },
+
+            ],
+          },
+        },
       },
     },
   };

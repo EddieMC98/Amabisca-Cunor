@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+      <label for="nombre" class="col-sm-3 control-label">Nombre de Unidad de Medida:</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <input type="hidden" id="codUnidadMedida" [(ngModel)]="item.codUnidadMedida">
+              <input type="text" class="form-control" id="nombreUnidadMedida" name="nombreUnidadMedida" [(ngModel)]="item.nombreUnidadMedida">
+          </div>
+      </div>
+  </div>
+
+  <div class="form-group">
+      <label for="estado" class="col-sm-3 control-label">Estado:</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <select class="form-control" id="estadoActivo" name="estadoActivo" [(ngModel)]="item.estadoActivo">
+                  <option value="0">Deshabilitado</option>
+                  <option value="1">Habilitado</option>
+              </select>
+          </div>
+      </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-sm btn-primary" (click)="guardar()">Guardar</button>
+  <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+</div>

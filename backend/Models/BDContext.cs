@@ -44,7 +44,7 @@ namespace backend.Models
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=amabisca;Username=postgres;Password=QRdffq4312");
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5434;Database=amabisca;Username=postgres;Password=QRdffq4312");
             }
         }
 
@@ -195,8 +195,7 @@ namespace backend.Models
                 entity.Property(e => e.EstadoActivo).HasColumnName("estado_activo");
 
                 entity.Property(e => e.NombreCategoria)
-                    .HasColumnName("nombre_categoria")
-                    .HasMaxLength(250);
+                    .HasColumnName("nombre_categoria");
             });
 
             modelBuilder.Entity<TbCliente>(entity =>

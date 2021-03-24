@@ -8,9 +8,8 @@
         <nb-card-body>
           <div class="row show-grid">
               <div class="col-md-3"><button class="btn btn-sm btn-success" (click)="nuevoRegistro()"><i class="fa fa-plus"></i> Nuevo registro</button></div>
-              <div class="col-md-4"><input #search class="search form-control input-sm" type="text" placeholder="Búscar..." (keydown.enter)="onSearch(search.value)"></div>
               <div class="col-md-5"></div>
-              
+
               <div class="col-md-12">
                   <br>
                   <ng2-smart-table [settings]="settings" [source]="source" (edit)="editarRegistro($event)" (delete)="eliminarRegistro($event)">
