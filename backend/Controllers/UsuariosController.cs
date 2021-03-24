@@ -48,6 +48,7 @@ namespace backend.Controllers
         }
 
         // GET: usuarios
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {

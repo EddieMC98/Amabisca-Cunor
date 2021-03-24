@@ -18,12 +18,17 @@ import { ProductoComponent } from "./producto.component";
 import { CategoriaComponent } from "./categoria/categoria.component";
 import { CategoriasModalComponent } from "./categoria/categorias-modal.component";
 import { CategoriaService } from "../../@core/data/categoria.service";
+import { UnidadMedidaComponent } from "./unidadmedida/unidad-medida.component";
+import { UnidadMedidaModalComponent } from "./unidadmedida/unidad-medida-modal.component";
+import { UnidadMedidaService } from "../../@core/data/unidad-medida.service";
 
 const components = [
   MarcaComponent,
   MarcaModalComponent,
   CategoriaComponent,
   CategoriasModalComponent,
+  UnidadMedidaComponent,
+  UnidadMedidaModalComponent
 ];
 
 @NgModule({
@@ -41,12 +46,15 @@ const components = [
     DatePipe,
     ToasterService,
     CategoriaService,
+    UnidadMedidaService,
   ],
   entryComponents: [
     MarcaModalComponent,
     MarcaComponent,
     CategoriaComponent,
     CategoriasModalComponent,
+    UnidadMedidaComponent,
+    UnidadMedidaModalComponent
   ],
 })
 export class ProductosModule {}

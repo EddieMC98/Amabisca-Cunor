@@ -63,17 +63,14 @@ export class TipoEnvioComponent implements OnInit {
       codTipoEnvio: {
         title: "ID",
         type: "number",
-        filter: false,
       },
       nombreTipoEnvio: {
         title: "Nombre",
         type: "string",
-        filter: false,
       },
       costoEnvio: {
         title: "Costo Envio (Q.)",
         type: "number",
-        filter: false,
       },
     },
   };

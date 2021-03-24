@@ -576,8 +576,7 @@ namespace backend.Models
 
                 entity.Property(e => e.CodUnidadMedida).HasColumnName("cod_unidad_medida");
                 entity.Property(e => e.CodigoProducto)
-                    .HasColumnName("codigo_producto")
-                    .HasMaxLength(250);
+                    .HasColumnName("codigo_producto");
 
                 entity.Property(e => e.DetalleProducto)
                     .HasColumnName("detalle_producto")
@@ -699,9 +698,7 @@ namespace backend.Models
                     .HasColumnName("cod_unidad_medida");
 
                 entity.Property(e => e.EstadoActivo)
-                    .HasColumnName("estado_activo")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasColumnName("estado_activo");
 
                 entity.Property(e => e.NombreUnidadMedida)
                     .HasColumnName("nombre_unidad_medida")

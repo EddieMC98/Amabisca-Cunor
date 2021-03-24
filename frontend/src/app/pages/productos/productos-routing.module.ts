@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { MarcaComponent } from './marca/marca.component';
 import { ProductoComponent } from './producto.component';
+import { UnidadMedidaComponent } from './unidadmedida/unidad-medida.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,7 +18,7 @@ const routes: Routes = [{
   },
   {
     path: 'unidadmedida',
-    component: MarcaComponent,
+    component: UnidadMedidaComponent,
   }],
 }];
 
@@ -31,4 +32,5 @@ export class ProductosRoutingModule { }
 export const routedComponents = [
   MarcaComponent,
   CategoriaComponent,
+  UnidadMedidaComponent,
 ];

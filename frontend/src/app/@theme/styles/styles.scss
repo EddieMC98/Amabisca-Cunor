@@ -10,6 +10,16 @@
 // global app font size
 @import './font-size';
 
+.nb-theme-default nb-menu .menu-item .menu-icon.fas {
+  font-size: 2rem;
+}
+.nb-theme-cosmic nb-menu .menu-item .menu-icon.fas {
+  font-size: 2rem;
+}
+.nb-theme-corporate nb-menu .menu-item .menu-icon.fas {
+  font-size: 2rem;
+}
+
 // loading progress bar theme
 @import './pace.theme';
 
