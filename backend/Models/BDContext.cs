@@ -190,8 +190,7 @@ namespace backend.Models
                 entity.ToTable("tb_categoria");
 
                 entity.Property(e => e.CodCategoria)
-                    .HasColumnName("cod_categoria")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_categoria");
 
                 entity.Property(e => e.EstadoActivo).HasColumnName("estado_activo");
 
@@ -575,12 +574,7 @@ namespace backend.Models
 
                 entity.Property(e => e.CodMarca).HasColumnName("cod_marca");
 
-                entity.Property(e => e.CodUnidadMedida)
-                    .IsRequired()
-                    .HasColumnName("cod_unidad_medida")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
+                entity.Property(e => e.CodUnidadMedida).HasColumnName("cod_unidad_medida");
                 entity.Property(e => e.CodigoProducto)
                     .HasColumnName("codigo_producto")
                     .HasMaxLength(250);
@@ -702,9 +696,7 @@ namespace backend.Models
                 entity.ToTable("tb_unidad_medida");
 
                 entity.Property(e => e.CodUnidadMedida)
-                    .HasColumnName("cod_unidad_medida")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasColumnName("cod_unidad_medida");
 
                 entity.Property(e => e.EstadoActivo)
                     .HasColumnName("estado_activo")

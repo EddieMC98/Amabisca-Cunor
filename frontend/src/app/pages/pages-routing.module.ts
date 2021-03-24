@@ -28,7 +28,16 @@ const routes: Routes = [{
   }, {
     path: 'seguridad',
     loadChildren: './seguridad/seguridad.module#SeguridadModule',
-  }, {
+  },
+  {
+    path: 'productos',
+    loadChildren: './productos/productos.module#ProductosModule',
+  },
+  {
+    path: 'tipoenvio',
+    loadChildren: './tipo-envio/tipo-envio.module#TipoEnvioModule',
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

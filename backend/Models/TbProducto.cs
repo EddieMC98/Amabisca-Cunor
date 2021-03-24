@@ -24,7 +24,7 @@ namespace backend.Models
         public int? UsrModificacion { get; set; }
         public int CodCategoria { get; set; }
         public int CodMarca { get; set; }
-        public string CodUnidadMedida { get; set; }
+        public int CodUnidadMedida { get; set; }
 
         public virtual TbCategoria CodCategoriaNavigation { get; set; }
         public virtual TbMarca CodMarcaNavigation { get; set; }

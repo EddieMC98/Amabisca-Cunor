@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+      <label for="nombre" class="col-sm-3 control-label">Nombre:</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <input type="hidden" id="codTipoEnvio" [(ngModel)]="item.codTipoEnvio">
+              <input type="text" class="form-control" id="nombreTipoEnvio" name="nombreTipoEnvio" [(ngModel)]="item.nombreTipoEnvio">
+          </div>
+      </div>
+  </div>
+
+    <div class="form-group">
+        <label for="costoEnvio" class="col-sm-3 control-label">Costo Envio:</label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" id="costoEnvio" name="costoEnvio" [(ngModel)]="item.costoEnvio">
+            </div>
+        </div>
+  
+  
+
+ 
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-sm btn-success" (click)="guardar()">Guardar</button>
+  <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+</div>

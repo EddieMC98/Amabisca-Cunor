@@ -10,7 +10,7 @@ namespace backend.Models
             TbProducto = new HashSet<TbProducto>();
         }
 
-        public string CodUnidadMedida { get; set; }
+        public int CodUnidadMedida { get; set; }
         public string NombreUnidadMedida { get; set; }
         public string EstadoActivo { get; set; }
 

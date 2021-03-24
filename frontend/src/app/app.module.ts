@@ -18,8 +18,8 @@ import { AuthGuard } from './auth-guard.service';
 import { NbAuthJWTInterceptor, NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
+  declarations: [AppComponent], //Componentes y Pipes
+  imports: [ //Módulos
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -29,8 +29,8 @@ import { NbAuthJWTInterceptor, NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
-  bootstrap: [AppComponent],
-  providers: [
+  bootstrap: [AppComponent], //Componente principal de la aplicación
+  providers: [ //Servicios y cosas que queramos inyectar
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true},
     { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: function () { return false; } },
     AuthGuard,
