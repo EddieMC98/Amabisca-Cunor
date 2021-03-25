@@ -18,16 +18,20 @@ import { ProductoComponent } from "./producto.component";
 import { CategoriaComponent } from "./categoria/categoria.component";
 import { CategoriasModalComponent } from "./categoria/categorias-modal.component";
 import { CategoriaService } from "../../@core/data/categoria.service";
+import { InventarioComponent } from './inventario/inventario.component';
+import { InventarioModalComponent } from './inventario/inventario-modal.component';
 
 const components = [
   MarcaComponent,
   MarcaModalComponent,
   CategoriaComponent,
   CategoriasModalComponent,
+  InventarioComponent,
+  InventarioModalComponent
 ];
 
 @NgModule({
-  declarations: [...routedComponents, ...components, ProductoComponent],
+  declarations: [...routedComponents, ...components, ProductoComponent, InventarioModalComponent],
   imports: [
     CommonModule,
     ProductosRoutingModule,
@@ -47,6 +51,8 @@ const components = [
     MarcaComponent,
     CategoriaComponent,
     CategoriasModalComponent,
+    InventarioComponent,
+    InventarioModalComponent
   ],
 })
 export class ProductosModule {}

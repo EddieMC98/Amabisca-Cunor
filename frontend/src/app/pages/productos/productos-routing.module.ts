@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { InventarioComponent } from './inventario/inventario.component';
 import { MarcaComponent } from './marca/marca.component';
 import { ProductoComponent } from './producto.component';
 
@@ -18,7 +19,12 @@ const routes: Routes = [{
   {
     path: 'unidadmedida',
     component: MarcaComponent,
-  }],
+  },
+  {
+    path: 'inventario',
+    component: InventarioComponent,
+  }
+],
 }];
 
 @NgModule({
@@ -31,4 +37,5 @@ export class ProductosRoutingModule { }
 export const routedComponents = [
   MarcaComponent,
   CategoriaComponent,
+  InventarioComponent
 ];

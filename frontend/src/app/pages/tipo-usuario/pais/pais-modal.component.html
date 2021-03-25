@@ -1,0 +1,47 @@
+<form [formGroup]="paisForm">
+  <div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+        <label for="nomPais" class="col-sm-3 control-label">Nombre del País:</label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <input type="hidden" id="codPais" [(ngModel)]="item.codPais"  [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control" id="nomPais" formControlName="nomPais" name="nomPais" [(ngModel)]="item.nomPais">
+            </div>
+            <div style="color:red;" *ngIf="paisForm.controls['nomPais'].hasError('required') && paisForm.controls['nomPais'].touched">El nombre del pais es obligatorio.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="acronimo" class="col-sm-3 control-label">Acrónimo del País:</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <input type="text" class="form-control" id="acronimo" formControlName="acronimo" name="acronimo" [(ngModel)]="item.acronimo">
+          </div>
+          <div style="color:red;" *ngIf="paisForm.controls['acronimo'].hasError('required') && paisForm.controls['acronimo'].touched">El acrónimo del pais es obligatorio.</div>
+      </div>
+  </div>
+
+    <div class="form-group">
+        <label for="estadoActivo" class="col-sm-3 control-label">Estado:</label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <select class="form-control" id="estadoActivo" name="estadoActivo" [(ngModel)]="item.estadoActivo"  [ngModelOptions]="{standalone: true}">
+                    <option value="0">Deshabilitado</option>
+                    <option value="1">Habilitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" [disabled]="paisForm.invalid" (click)="guardar()">Guardar</button>
+    <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
+  </form>

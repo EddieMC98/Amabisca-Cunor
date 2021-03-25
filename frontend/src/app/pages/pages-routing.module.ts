@@ -24,6 +24,10 @@ const routes: Routes = [{
     loadChildren: './tipo-envio/tipo-envio.module#TipoEnvioModule',
   },
   {
+    path: 'tipo-usuario',
+    loadChildren: './tipo-usuario/tipo-usuario.module#TipoUsuarioModule',
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

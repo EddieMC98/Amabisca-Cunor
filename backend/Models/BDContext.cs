@@ -493,8 +493,7 @@ namespace backend.Models
                 entity.ToTable("tb_pais");
 
                 entity.Property(e => e.CodPais)
-                    .HasColumnName("cod_pais")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_pais");
 
                 entity.Property(e => e.Acronimo)
                     .HasColumnName("acronimo")
