@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { TipoEnvio } from "../../../@core/modelos/tipoenvio";
 import { TipoEnvioService } from "../../../@core/data/tipo-envio.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "ngx-tipo-envio-modal",
@@ -12,11 +13,20 @@ export class TipoEnvioModalComponent implements OnInit {
   public item = new TipoEnvio();
   modalHeader: string;
   public esNuevo: Boolean = false;
+  tipoenvioForm: FormGroup;
 
   constructor(
     private activeModal: NgbActiveModal,
-    private service: TipoEnvioService
-  ) {}
+    private service: TipoEnvioService,
+    private _builder: FormBuilder
+  ) {
+    this.tipoenvioForm=this._builder.group({
+      nombreTipoEnvio:['',Validators.compose([Validators.required,Validators.maxLength(100)])],
+      costoEnvio:['',Validators.compose([Validators.required])],
+    });
+
+
+  }
   ngOnInit() {}
 
   guardar() {

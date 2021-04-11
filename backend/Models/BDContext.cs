@@ -457,8 +457,7 @@ namespace backend.Models
                 entity.ToTable("tb_inventario");
 
                 entity.Property(e => e.CodInventario)
-                    .HasColumnName("cod_inventario")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_inventario");
 
                 entity.Property(e => e.EstadoActivo).HasColumnName("estado_activo");
 
@@ -493,8 +492,7 @@ namespace backend.Models
                 entity.ToTable("tb_pais");
 
                 entity.Property(e => e.CodPais)
-                    .HasColumnName("cod_pais")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_pais");
 
                 entity.Property(e => e.Acronimo)
                     .HasColumnName("acronimo")
@@ -567,8 +565,7 @@ namespace backend.Models
                 entity.ToTable("tb_producto");
 
                 entity.Property(e => e.CodProducto)
-                    .HasColumnName("cod_producto")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_producto");
 
                 entity.Property(e => e.CodCategoria).HasColumnName("cod_categoria");
 

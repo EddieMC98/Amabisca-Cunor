@@ -1,22 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  ToasterService,
-  ToasterConfig,
-  Toast,
-  BodyOutputType,
-} from "angular2-toaster";
-import { DatePipe } from "@angular/common";
-import { LocalDataSource } from "ng2-smart-table";
-import {
-  NgbModal,
-  NgbModalRef,
-  ModalDismissReasons,
-} from "@ng-bootstrap/ng-bootstrap";
 import { MarcaService } from "../../../@core/data/marca.service";
 import { MarcaModalComponent } from "./marca-modal.component";
 
 import { Marca } from "../../../@core/modelos/marca";
-import { Observable } from "rxjs/Observable";
+import { DatePipe } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import {
+  ModalDismissReasons,
+  NgbModal,
+  NgbModalRef,
+} from "@ng-bootstrap/ng-bootstrap";
+import {
+  BodyOutputType,
+  Toast,
+  ToasterConfig,
+  ToasterService,
+} from "angular2-toaster";
+import { LocalDataSource } from "ng2-smart-table";
 
 import "style-loader!angular2-toaster/toaster.css";
 
@@ -58,17 +57,14 @@ export class MarcaComponent implements OnInit {
       confirmSave: true,
       editButtonContent: '<i class="fas fa-user-edit"></i>',
     },
-
     columns: {
       codMarca: {
         title: "ID",
         type: "number",
-        
       },
       nombreMarca: {
         title: "Nombre",
         type: "string",
-        
       },
       estadoActivo: {
         title: "Estado",
@@ -76,19 +72,19 @@ export class MarcaComponent implements OnInit {
           return value === 1 ? "Habilitado" : "No habilitado";
         },
         filter: {
-          type: 'list',
+          type: "list",
           config: {
-            selectText: 'Estado',
+            selectText: "Estado",
             list: [
-              { value: '0', title: 'Deshabilitado' },
-              { value: '1', title: 'Habilitado' },
-
+              { value: "0", title: "Deshabilitado" },
+              { value: "1", title: "Habilitado" },
             ],
           },
         },
       },
     },
   };
+  
   ngOnInit() {
     this.getAll();
   }

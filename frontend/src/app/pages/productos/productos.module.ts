@@ -21,6 +21,12 @@ import { CategoriaService } from "../../@core/data/categoria.service";
 import { UnidadMedidaComponent } from "./unidadmedida/unidad-medida.component";
 import { UnidadMedidaModalComponent } from "./unidadmedida/unidad-medida-modal.component";
 import { UnidadMedidaService } from "../../@core/data/unidad-medida.service";
+import { InventarioComponent } from "./inventario/inventario.component";
+import { InventarioModalComponent } from "./inventario/inventario-modal.component";
+import { InventarioService } from "../../@core/data/inventario.service";
+import { CProductoComponent } from "./producto/cproducto.component";
+import { ProductoService } from "../../@core/data/producto.service";
+import { ProductoModalComponent } from './producto/producto-modal.component';
 
 const components = [
   MarcaComponent,
@@ -28,11 +34,15 @@ const components = [
   CategoriaComponent,
   CategoriasModalComponent,
   UnidadMedidaComponent,
-  UnidadMedidaModalComponent
+  UnidadMedidaModalComponent,
+  InventarioComponent,
+  InventarioModalComponent,
+  CProductoComponent,
+  ProductoModalComponent,
 ];
 
 @NgModule({
-  declarations: [...routedComponents, ...components, ProductoComponent],
+  declarations: [...routedComponents, ...components, ProductoComponent, ProductoModalComponent],
   imports: [
     CommonModule,
     ProductosRoutingModule,
@@ -47,6 +57,8 @@ const components = [
     ToasterService,
     CategoriaService,
     UnidadMedidaService,
+    InventarioService,
+    ProductoService,
   ],
   entryComponents: [
     MarcaModalComponent,
@@ -54,7 +66,11 @@ const components = [
     CategoriaComponent,
     CategoriasModalComponent,
     UnidadMedidaComponent,
-    UnidadMedidaModalComponent
+    UnidadMedidaModalComponent,
+    InventarioComponent,
+    InventarioModalComponent,
+    CProductoComponent,
+    ProductoModalComponent,
   ],
 })
 export class ProductosModule {}

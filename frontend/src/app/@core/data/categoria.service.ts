@@ -23,6 +23,10 @@ export class CategoriaService {
       catchError(err => this.handleError(err, 'Error al obtener las categorias'))
     )
   }
+
+  findAll(): Observable<Categoria[]>  {
+    return this.http.get<Categoria[]>(APPCONFIG.BASE_URL+"categoria");
+  }
   // getConfiguracionesPaginado(params: HttpParams): Observable<Paged<Configuracion>> {
   //   return this.http.get<Paged<Configuracion>>(this.url + '/paginado', { params }).pipe(
   //     catchError(err => this.handleError(err, 'Error al obtener las configuraciones'))

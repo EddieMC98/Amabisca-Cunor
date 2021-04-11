@@ -11,7 +11,7 @@ using System;
 
 namespace backend.Controllers
 {
-    [Authorize]
+  // [Authorize(Roles = "Administrador")]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
@@ -48,7 +48,6 @@ namespace backend.Controllers
         }
 
         // GET: usuarios
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {

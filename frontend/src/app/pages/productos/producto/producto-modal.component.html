@@ -1,0 +1,122 @@
+<form [formGroup]="productForm">
+  <div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+        <label for="nombreProducto" class="col-sm-3 control-label">Nombre</label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <input type="hidden" id="codProducto" [(ngModel)]="item.codProducto"  [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto" name="nombreProducto" [(ngModel)]="item.nombreProducto">
+            </div>
+            <div style="color:red;" *ngIf="productForm.controls['nombreProducto'].hasError('required') && productForm.controls['nombreProducto'].touched">El nombre del producto es obligatorio.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="codigoProducto" class="col-sm-3 control-label">Codigo Producto</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <input type="text" class="form-control" id="codigoProducto" formControlName="codigoProducto" name="codigoProducto" [(ngModel)]="item.codigoProducto">
+           </div>
+          <div style="color:red;" *ngIf="productForm.controls['codigoProducto'].hasError('required') && productForm.controls['codigoProducto'].touched">El código del producto es obligatorio.</div>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="precioCosto" class="col-sm-3 control-label">Precio Costo</label>
+    <div class="col-sm-9">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" id="precioCosto" formControlName="precioCosto" name="precioCosto" [(ngModel)]="item.precioCosto">
+         </div>
+        <div style="color:red;" *ngIf="productForm.controls['precioCosto'].hasError('required') && productForm.controls['precioCosto'].touched">El precio costo del producto es obligatorio.</div>
+    </div>
+</div>
+
+<div class="form-group">
+  <label for="precioVenta" class="col-sm-3 control-label">Precio Venta</label>
+  <div class="col-sm-9">
+      <div class="input-group input-group-sm">
+          <input type="text" class="form-control" id="precioVenta" formControlName="precioVenta" name="precioVenta" [(ngModel)]="item.precioVenta">
+       </div>
+      <div style="color:red;" *ngIf="productForm.controls['precioVenta'].hasError('required') && productForm.controls['precioVenta'].touched">El precio venta del producto es obligatorio.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="detalleProducto" class="col-sm-3 control-label">Descripción</label>
+  <div class="col-sm-9">
+      <div class="input-group input-group-sm">
+          <input type="text" class="form-control" id="detalleProducto" formControlName="detalleProducto" name="detalleProducto" [(ngModel)]="item.detalleProducto">
+       </div>
+      <div style="color:red;" *ngIf="productForm.controls['detalleProducto'].hasError('required') && productForm.controls['detalleProducto'].touched">La descripción del producto es obligatoria.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="imagenProducto" class="col-sm-3 control-label">Imagen</label>
+  <div class="col-sm-9">
+      <div class="input-group input-group-sm">
+          <img [src]="imagenUrl" style="width: 150px;height: 150px;">
+        <input type="file" #file class="form-control" id="imagenProducto" formControlName="imagenProducto" name="imagenProducto" [(ngModel)]="item.imagenProducto" (change)="uploadFile(file.files)" style="display: none;"  >
+      <button type="button" class="btn btn-success" (click)="file.click()">Agregar Imagen</button>
+      </div>
+      <div style="color:red;" *ngIf="productForm.controls['imagenProducto'].hasError('required') && productForm.controls['imagenProducto'].touched">La imagen del producto es obligatoria.</div>
+  </div>
+</div>
+
+    <div class="form-group">
+        <label for="estadoActivo" class="col-sm-3 control-label">Estado:</label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <select class="form-control" id="estadoActivo" name="estadoActivo" [(ngModel)]="item.estadoActivo"  [ngModelOptions]="{standalone: true}">
+                    <option value="0">Deshabilitado</option>
+                    <option value="1">Habilitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="codCategoria" class="col-sm-3 control-label">Categoria</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <select class="form-control" id="codCategoria" name="codCategoria" [(ngModel)]="item.codCategoria" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let item of lstCategoria" value= {{item.codCategoria}}>{{item.nombreCategoria}}</option>
+              </select>
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="codMarca" class="col-sm-3 control-label">Marca</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <select class="form-control" id="codMarca" name="codMarca" [(ngModel)]="item.codMarca" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let item of lstMarca" value= {{item.codMarca}}>{{item.nombreMarca}}</option>
+              </select>
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="codUnidadMedida" class="col-sm-3 control-label">Unidad Medida</label>
+      <div class="col-sm-9">
+          <div class="input-group input-group-sm">
+              <select class="form-control" id="codUnidadMedida" name="codUnidadMedida" [(ngModel)]="item.codUnidadMedida" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let item of lstUnidadMedida" value= {{item.codUnidadMedida}}>{{item.nombreUnidadMedida}}</option>
+              </select>
+          </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" [disabled]="productForm.invalid" (click)="guardar()">Guardar</button>
+    <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
+  </form>

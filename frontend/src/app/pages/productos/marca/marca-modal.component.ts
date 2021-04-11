@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Marca } from "../../../@core/modelos/marca";
 import { MarcaService } from "../../../@core/data/marca.service";
-import { NumberCardModule } from "@swimlane/ngx-charts";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "ngx-marca-modal",
@@ -13,16 +13,23 @@ export class MarcaModalComponent implements OnInit {
   public item = new Marca();
   modalHeader: string;
   public esNuevo: Boolean = false;
+  marcaForm:FormGroup;
+  //CodPais:number;
 
-  constructor(
-    private activeModal: NgbActiveModal,
-    private service: MarcaService
-  ) {}
+  constructor(private activeModal: NgbActiveModal, private service: MarcaService,private _builder:FormBuilder) {
+    this.marcaForm=this._builder.group({
+      nombreMarca:['',Validators.compose([Validators.required,Validators.maxLength(100)])],
+    });
+
+   }
+
   ngOnInit() {}
   guardar() {
-    var z: number = +this.item.estadoActivo;
-    this.item.estadoActivo = z;
     if (this.esNuevo) {
+      var z = +this.item.estadoActivo;
+
+      this.item.estadoActivo = z;
+
       this.service.guardar(this.item).subscribe(
         (data) => {
           this.activeModal.close("Registro guardado exitósamente");
@@ -32,6 +39,8 @@ export class MarcaModalComponent implements OnInit {
         }
       );
     } else {
+      var z = +this.item.estadoActivo;
+      this.item.estadoActivo = z;
       this.service.actualizar(this.item).subscribe(
         (data) => {
           this.activeModal.close("Registro actualizado exitósamente");

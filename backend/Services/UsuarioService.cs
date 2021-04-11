@@ -48,12 +48,15 @@ namespace backend.Services
 
             String tipo = "";
             if (user.cod_rol == 1){
-                tipo = "admin_general";
+                tipo = "Administrador";
             }else if (user.cod_rol == 2){
-                tipo = "negocio";
+                tipo = "Operador";
+            }
+            else if (user.cod_rol == 3){
+                tipo = "Cliente";
             }
             else{
-                tipo = "normal";
+                tipo = "Normal";
             }
 
             // authentication successful so generate jwt token
