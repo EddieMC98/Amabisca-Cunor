@@ -1,0 +1,79 @@
+<form [formGroup]="editarPerfilForm">
+  <div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <div class="row">
+
+    <div class="col-md-12">
+
+
+          <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-4 pb-5">
+                    <!-- Account Sidebar-->
+                    <div class="author-card pb-3">
+                      <br><br>
+                        <div class="author-card-profile">
+
+                            <div class="author-card-avatar"><img  src="http://localhost:5000/Resources/Images/{{
+                          direccionImagen
+                        }}"
+                   style="width: 200px; height: 200px">
+                            </div>
+                            <div class="author-card-details">
+                                <h3 style="color:black;">{{item.nombre_completo}}</h3><span class="author-card-position">Registrado el: {{fecha}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Profile Settings-->
+                <div class="col-lg-8 pb-5">
+                    <div class="row">
+
+                        <!-- Datos de Edición Inicio-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="hidden" id="cod_usuario" [(ngModel)]="item.cod_usuario"  [ngModelOptions]="{standalone: true}">
+                                <label for="nombre_completo">Nombre Completo</label>
+                                <input class="form-control" type="text" id="nombre_completo" formControlName="nombre_completo"  [(ngModel)]="item.nombre_completo" placeholder="Nombre Completo" required="">
+                            </div>
+                            <div style="color:red;" *ngIf="editarPerfilForm.controls['nombre_completo'].hasError('required') && editarPerfilForm.controls['nombre_completo'].touched">El nombre del usuario es obligatorio.</div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="account-fn">Correo Electrónico:</label>
+                              <input class="form-control" type="text"  disabled id="correo_electronico" name="correo_electronico" [(ngModel)]="item.correo_electronico"  [ngModelOptions]="{standalone: true}" placeholder="Correo Electrónico" required="">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="account-fn">Contraseña:</label>
+                              <input class="form-control" type="password" id="contrasenia" name="contrasenia" [(ngModel)]="item.contrasenia"  [ngModelOptions]="{standalone: true}" placeholder="********" required="">
+                          </div>
+
+                        </div>
+
+                        <!-- Datos de Edición Final-->
+
+                        <div class="col-12">
+                            <hr class="mt-2 mb-3">
+                            <div class="d-flex flex-wrap  align-items-center">
+
+                                <button class="btn btn-primary" type="button" [disabled]="editarPerfilForm.invalid" (click)="guardar()">Actualizar</button> &nbsp;&nbsp;
+                                <button class="btn btn-danger" type="button" (click)="closeModal()">Cancelar</button>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+  </div>
+</form>

@@ -1,43 +1,120 @@
-<div class="modal-header">
-  <span>{{ modalHeader }}</span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="form-group">
-    <label for="nombre" class="col-sm-3 control-label"
-      >Nombre de Categoría:</label
-    >
-    <div class="col-sm-9">
-      <div class="input-group input-group-sm">
-        <input type="hidden" id="codProducto" [(ngModel)]="item.codProducto" />
-        <input
-          type="text"
-          class="form-control"
-          id="nombreProducto"
-          name="nombreProducto"
-          [(ngModel)]="item.nombreProducto"
+<div class="row">
+  <div class="col-md-12">
+    <div class="modal-header">
+      <span>{{ modalHeader }}</span>
+      <button class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="centrar">
+        <link
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet"
         />
+
+        <div class="container">
+          <div>
+            <div>
+              <div class="card">
+                <div class="p-4">
+                  <div class="d-flex flex-row">
+                    <div class="">
+                      <img
+                        src="http://localhost:5000/Resources/Images/{{
+                          item.imagenProducto
+                        }}"
+                        style="width: 200px; height: 200px"
+                        alt="user"
+                        class="rounded-circle"
+                        width="100"
+                      />
+                    </div>
+                    <!-- <div class="input-group input-group-sm">
+                      <input
+                        type="hidden"
+                        id="codProducto"
+                        [(ngModel)]="item.codProducto"
+                      />
+                    </div> -->
+                    <div class="pl-4">
+                      <br /><br /><br /><br /><br />
+                      <h5 style="color: gray">Nombre del Producto:</h5>
+                      <h2 style="color: black">
+                        {{ item.nombreProducto }}
+                      </h2>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col border-right text-center">
+                      <h2 class="font-light" style="color: black">
+                        Q. {{ item.precioVenta }}
+                      </h2>
+                      <h4 class="text-uppercase" style="color: gray">Precio</h4>
+                    </div>
+                    <div class="col border-right text-center">
+                      <h2 class="font-light" style="color: black">
+                        {{ item.categoria }}
+                      </h2>
+                      <h4 class="text-uppercase" style="color: gray">
+                        Categoría
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body border-top">
+                  <h5 style="text-align: center; color: gray">Descripción</h5>
+                  <p class="text-center aboutscroll" style="color: black">
+                    {{ item.detalleProducto }}
+                  </p>
+                  <hr />
+                  <div class="row mt-5">
+                    <div class="col text-center">
+                      <h2 class="font-light" style="color: black">
+                        {{ item.marca }}
+                      </h2>
+                      <h4 class="text-uppercase" style="color: gray">Marca</h4>
+                    </div>
+                    <div class="col text-center">
+                      <h2 class="font-light" style="color: black">
+                        {{ item.unidadMedida }}
+                      </h2>
+                      <h4 class="text-uppercase" style="color: gray">
+                        Unidad de Medida
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body border-top">
+                  <ul
+                    class="list-style-none list-icons d-flex flex-item text-center"
+                  >
+                    <li class="col">
+                      <button
+                        class="btn btn-danger btn-rounded text-white text-uppercase font-14"
+                        (click)="closeModal()"
+                      >
+                        <i class="fas fa-hand-point-left mr-2"></i> Regresar a
+                        la Lista
+                      </button>
+                    </li>
+                    <li class="col">
+                      <button
+                        class="btn btn-success btn-rounded text-white text-uppercase font-14"
+                        (click)="addProducto()"
+                      >
+                        <i class="fas fa-shopping-cart mr-2"></i> Agregar al
+                        carrito
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- <div class="form-group">
-      <label for="estado" class="col-sm-3 control-label">Estado:</label>
-      <div class="col-sm-9">
-          <div class="input-group input-group-sm">
-              <select class="form-control" id="estadoActivo" name="estadoActivo" [(ngModel)]="item.estadoActivo">
-                  <option value="0">Deshabilitado</option>
-                  <option value="1">Habilitado</option>
-              </select>
-          </div>
-      </div>
-  </div> -->
-</div>
-<div class="modal-footer">
-  <button class="btn btn-sm btn-primary" (click)="guardar()">
-    Agregar a Carrito
-  </button>
-  <button class="btn btn-sm btn-danger" (click)="closeModal()">Cerrar</button>
 </div>

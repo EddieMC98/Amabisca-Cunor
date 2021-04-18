@@ -8,26 +8,31 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UsuarioService {
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {}
 
-    findAll(): Observable<Usuario[]>  {
-        return this.http.get<Usuario[]>(APPCONFIG.BASE_URL+"usuarios");
-      }
-     
-      findById(id: number): Observable<Usuario> {
-        return this.http.get<Usuario>(APPCONFIG.BASE_URL+"usuarios/" + id);
-      }
-     
-      guardar(item: Usuario): Observable<Usuario> {
-        return this.http.post<any>(APPCONFIG.BASE_URL+"usuarios",item);
-      }
-     
-      eliminarPorId(id: number): Observable<boolean> {
-        return this.http.delete<any>(APPCONFIG.BASE_URL+"usuarios/"+id);
-      }
-     
-      actualizar(item: Usuario): Observable<Usuario> {
-        return this.http.put<any>(APPCONFIG.BASE_URL+"usuarios/"+item.cod_usuario,item);
-      }
+  findAll(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(APPCONFIG.BASE_URL + "usuarios");
+  }
+
+  findById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(APPCONFIG.BASE_URL + "usuarios/" + id);
+  }
+
+  guardar(item: Usuario): Observable<Usuario> {
+    return this.http.post<any>(APPCONFIG.BASE_URL + "usuarios/register", item);
+  }
+
+  eliminarPorId(id: number): Observable<boolean> {
+    return this.http.delete<any>(APPCONFIG.BASE_URL + "usuarios/" + id);
+  }
+
+  actualizar(item: Usuario): Observable<Usuario> {
+    return this.http.put<any>(
+      APPCONFIG.BASE_URL + "usuarios/" + item.cod_usuario,
+      item
+    );
+  }
+  findByIdPerfil(): Observable<Usuario> {
+    return this.http.get<Usuario>(APPCONFIG.BASE_URL + "usuarios/Perfil");
+  }
 }

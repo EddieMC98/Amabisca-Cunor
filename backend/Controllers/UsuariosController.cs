@@ -11,7 +11,7 @@ using System;
 
 namespace backend.Controllers
 {
-  // [Authorize(Roles = "Administrador")]
+    // [Authorize(Roles = "Administrador")]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
@@ -30,7 +30,7 @@ namespace backend.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        public IActionResult Authenticate([FromBody] AuthenticateModel model)
         {
             var user = _userService.Authenticate(model.email, model.password);
 
@@ -77,14 +77,16 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> editar(int id, RegisterModel usuario)
         {
-            if (id != usuario.cod_usuario )
+            if (id != usuario.cod_usuario)
             {
                 return BadRequest();
             }
 
             Usuario reg = _context.Usuario.Find(usuario.cod_usuario);
-            if(reg.correo_electronico != usuario.correo_electronico){
-                if( _context.Usuario.Any(x => x.correo_electronico == usuario.correo_electronico)){
+            if (reg.correo_electronico != usuario.correo_electronico)
+            {
+                if (_context.Usuario.Any(x => x.correo_electronico == usuario.correo_electronico))
+                {
                     return BadRequest();
                 }
             }
@@ -92,8 +94,8 @@ namespace backend.Controllers
             reg.estado = usuario.estado;
             reg.fec_creacion = DateTime.Now;
             reg.cod_rol = usuario.cod_rol;
-            reg.correo_electronico= usuario.correo_electronico;
-            
+            reg.correo_electronico = usuario.correo_electronico;
+
 
             if (!string.IsNullOrWhiteSpace(usuario.contrasenia))
             {
@@ -149,7 +151,7 @@ namespace backend.Controllers
             reg.salt = passwordSalt;
             reg.estado = usuario.estado;
             reg.fec_creacion = DateTime.Now;
-            reg.cod_rol =  usuario.cod_rol;
+            reg.cod_rol = usuario.cod_rol;
 
             _context.Usuario.Add(reg);
 
@@ -161,15 +163,16 @@ namespace backend.Controllers
 
         [AllowAnonymous]
         [HttpPost("new-register")]
-        public async Task<ActionResult<Usuario>> newUser(Registro rm){
+        public async Task<ActionResult<Usuario>> newUser(Registro rm)
+        {
 
             RegisterModel usuario = new RegisterModel();
-            usuario.nombre_completo=rm.fullName;
+            usuario.nombre_completo = rm.fullName;
             usuario.correo_electronico = rm.email;
             usuario.contrasenia = rm.password;
-            usuario.estado=1;
-            usuario.cod_rol=3;
-            
+            usuario.estado = 1;
+            usuario.cod_rol = 3;
+
             if (string.IsNullOrWhiteSpace(usuario.contrasenia) || usuario.contrasenia != rm.confirmPassword)
                 return BadRequest();
 
@@ -187,7 +190,7 @@ namespace backend.Controllers
             reg.salt = passwordSalt;
             reg.estado = usuario.estado;
             reg.fec_creacion = DateTime.Now;
-            reg.cod_rol =  usuario.cod_rol;
+            reg.cod_rol = usuario.cod_rol;
 
             _context.Usuario.Add(reg);
 
@@ -197,7 +200,7 @@ namespace backend.Controllers
             return Ok(reg);
         }
 
-        
+
         private bool UsuariosExists(int id)
         {
             return _context.Usuario.Any(e => e.cod_usuario == id);
@@ -223,14 +226,18 @@ namespace backend.Controllers
         [HttpPost("menu/permisos")]
         public async Task<ActionResult<int>> SaveMenus(List<MenuOpcion2> items)
         {
-            foreach(var item in items){
+            foreach (var item in items)
+            {
                 var permiso = _context.Permiso.SingleOrDefault(x => x.cod_rol == item.cod_rol && x.cod_menu_opcion == item.cod_menu_opcion);
 
-                if (permiso != null){
+                if (permiso != null)
+                {
                     permiso.fec_actualizacion = DateTime.Now;
                     permiso.estado = item.estado_permiso;
                     _context.Entry(permiso).State = EntityState.Modified;
-                }else{
+                }
+                else
+                {
                     Permiso nuevo = new Permiso();
                     nuevo.fec_actualizacion = DateTime.Now;
                     nuevo.fec_creacion = DateTime.Now;
@@ -246,5 +253,25 @@ namespace backend.Controllers
 
             return 1;
         }
+
+        //Metodos para Perfil
+        [HttpGet("Perfil")]
+        public async Task<ActionResult<Usuario>> GetUsuariosPerfil()
+        {
+            int? codUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+
+            var usuarios = await _context.Usuario.FindAsync(codUsuario);
+
+            if (usuarios == null)
+            {
+                return NotFound();
+            }
+
+            usuarios.contrasenia = null;
+            usuarios.salt = null;
+
+            return usuarios;
+        }
+        
     }
 }

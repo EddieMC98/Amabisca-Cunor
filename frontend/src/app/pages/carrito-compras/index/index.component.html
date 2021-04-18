@@ -1,0 +1,245 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-body>
+        <div class="centrar">
+          <div class="container pb-5 mt-n2 mt-md-n3">
+            <div class="row">
+              <div class="col-xl-9 col-md-8">
+                <h2
+                  class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"
+                >
+                  <h3 style="color: black; text-align: center">
+                    CARRITO DE COMPRAS
+                  </h3>
+                  <button
+                    class="btn btn-success font-size-sm"
+                    (click)="regresarCatalogo()"
+                  >
+                    <i class="fas fa-hand-point-left"></i>&nbsp;Seguir comprando
+                  </button>
+                </h2>
+                <!-- Item-->
+                <div
+                  class="d-sm-flex justify-content-between my-4 pb-4 border-bottom"
+                  *ngFor="let pr of lstProducto"
+                >
+                  <div class="media d-block d-sm-flex text-center text-sm-left">
+                    <a class="cart-item-thumb mx-auto mr-sm-4" href="#"
+                      ><img
+                        src="http://localhost:5000/Resources/Images/{{
+                          pr.imagenProducto
+                        }}"
+                        alt="Product"
+                    /></a>
+                    <div class="media-body pt-3">
+                      <h2>{{ pr.nombreProducto }}</h2>
+                      <h6 class="text-muted mr-2">
+                        Precio:
+                        <h3>Q.{{ pr.precioVenta }}</h3>
+                      </h6>
+                      <h6
+                        class="text-muted mr-5"
+                        style="text-align: left; float: left"
+                      >
+                        Marca:
+                        <h5>{{ pr.marca }}</h5>
+                      </h6>
+                      &nbsp;
+                      <h6
+                        class="text-muted mr-5"
+                        style="text-align: left; float: left; display: inline"
+                      >
+                        Categoría:
+                        <h5>{{ pr.categoria }}</h5>
+                      </h6>
+                      &nbsp;
+                      <h6
+                        class="text-muted mr-5"
+                        style="text-align: left; float: left; display: inline"
+                      >
+                        Unidad de Medida:
+                        <h5>{{ pr.unidadMedida }}</h5>
+                      </h6>
+                    </div>
+                  </div>
+                  <div
+                    class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left"
+                    style="max-width: 10rem"
+                  >
+                    <div class="form-group mb-2">
+                      <label for="quantity1">CANTIDAD</label>
+                      <input
+                        class="form-control form-control-sm"
+                        style="font-size: 18px"
+                        type="number"
+                        min="1"
+                        id="quantity1"
+                        value="1"
+                        [(ngModel)]="pr.precioCosto"
+                        (ngModelChange)="actualizar()"
+                      />
+                    </div>
+
+                    <button
+                      class="btn btn-outline-danger btn-sm btn-block mb-3"
+                      style="
+                        font-size: 15px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      "
+                      (click)="eliminarProducto(pr.codProducto)"
+                    >
+                      <i class="fas fa-trash-alt fa-2x"></i>&nbsp;ELIMINAR
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Sidebar-->
+              <div class="col-xl-3 col-md-4 pt-3 pt-md-0">
+                <h2
+                  class="h6 px-4 py-3 bg-secondary text-center"
+                  style="color: black; font-size: 20px"
+                >
+                  Subtotal
+                </h2>
+                <div class="h3 font-weight-semibold text-center py-3">
+                  Q. {{ total }}
+                </div>
+                <hr />
+
+                <button
+                  class="btn btn-primary btn-block"
+                  style="
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                  (click)="comprar()"
+                >
+                  <i class="far fa-credit-card fa-2x"></i>&nbsp;COMPRAR
+                </button>
+                <div class="pt-4">
+                  <div class="accordion" id="cart-accordion">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3
+                          class="accordion-heading font-weight-semibold"
+                          style="color: black"
+                        >
+                          <a
+                            class="collapsed"
+                            role="button"
+                            data-toggle="collapse"
+                            aria-expanded="true"
+                            aria-controls="shipping"
+                            >Eliga su método de entrega<span
+                              class="accordion-indicator"
+                            ></span
+                          ></a>
+                        </h3>
+                      </div>
+                      <div class="card-body">
+                        <nb-radio-group
+                          [(ngModel)]="option"
+                          (valueChange)="getRecogerTienda(option)"
+                        >
+                          <nb-radio
+                            *ngFor="let option of options"
+                            [value]="option.value"
+                          >
+                            {{ option.label }}
+                          </nb-radio>
+                        </nb-radio-group>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-4" *ngIf="option === '1' && cont != '1'">
+                  <div class="accordion" id="cart-accordion">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3
+                          class="accordion-heading font-weight-semibold"
+                          style="color: black"
+                        >
+                          <a
+                            class="collapsed"
+                            role="button"
+                            data-toggle="collapse"
+                            aria-expanded="true"
+                            aria-controls="shipping"
+                            >Eliga su método de envio<span
+                              class="accordion-indicator"
+                            ></span
+                          ></a>
+                        </h3>
+                      </div>
+                      <div>
+                        <div class="card-body">
+                          <form class="needs-validation" novalidate="">
+                            <div class="form-group">
+                              <select
+                                class="form-control custom-select"
+                                required=""
+                                (change)="getPrecioCostoTransporte($event)"
+                              >
+                                <option value="0">
+                                  Elija la empresa de envío
+                                </option>
+                                <option
+                                  *ngFor="let item of lstEmpresasTransp"
+                                  value="{{ item.codTipoEnvio }}"
+                                >
+                                  {{ item.nombreTipoEnvio }}
+                                </option>
+                              </select>
+                              <div class="invalid-feedback">
+                                ¡Eliga su empresa de envío!
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <select
+                                class="form-control custom-select"
+                                required=""
+                                (change)="getDireccionCliente($event)"
+                              >
+                                <option value="0">
+                                  Elija su dirección de envío
+                                </option>
+                                <option
+                                  *ngFor="let item of lstDireccionesCliente"
+                                  value="{{ item.codDireccionEnvio }}"
+                                >
+                                  {{ item.direccion }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <input
+                                class="form-control"
+                                type="text"
+                                placeholder=""
+                                value="{{ precio_costo }}"
+                                required=""
+                                disabled
+                              />
+                            </div>
+                           
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

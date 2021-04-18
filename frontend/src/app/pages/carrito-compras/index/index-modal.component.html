@@ -1,0 +1,198 @@
+<div class="modal-header">
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-body>
+          <link
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+            rel="stylesheet"
+          />
+          <div class="container padding-bottom-3x mb-1">
+            <!-- Alert-->
+            <div
+              class="alert alert-info alert-dismissible fade show text-center"
+              style="margin-bottom: 30px"
+            >
+              <span class="alert-close" data-dismiss="alert"></span
+              >&nbsp;&nbsp;¡Revisa tus productos antes de realizar la compra! -
+              <strong> Amabisca</strong> , gracias por preferirnos.
+            </div>
+            <!-- Shopping Cart-->
+            <div class="table-responsive shopping-cart">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Precio Unitario</th>
+                    <th class="text-center">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prod of lstProducto">
+                    <td>
+                      <div class="product-item">
+                        <a class="product-thumb" href="#"
+                          ><img
+                            src="http://localhost:5000/Resources/Images/{{
+                              prod.imagenProducto
+                            }}"
+                            alt="Product"
+                        /></a>
+                        <div class="product-info">
+                          <!-- <h4 class="product-title" ><a href="#">Unionbay Park</a></h4> -->
+                          <span style="font-size: 25px"
+                            ><strong>{{ prod.nombreProducto }}</strong>
+                          </span>
+                          <span><em>Marca:</em> {{ prod.marca }}</span>
+                          <span><em>Categoría:</em> {{ prod.categoria }}</span>
+                          <span
+                            ><em>Unidad Medida:</em>
+                            {{ prod.unidadMedida }}</span
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <div class="count-input">
+                        <select class="form-control" disabled>
+                          <option value="0">{{ prod.precioCosto }}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td class="text-center text-lg text-medium">
+                      Q. {{ prod.precioVenta }}
+                    </td>
+                    <td class="text-center text-lg text-medium">
+                      Q. {{ prod.precioVenta * prod.precioCosto }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="shopping-cart-footer">
+              <div class="column"></div>
+              <div class="column text-lg">
+                SUBTOTAL:
+                <span class="text-medium"
+                  >Q. {{ item.total - item.tipoEntrega.costoEnvio }}
+                </span>
+              </div>
+              &nbsp;
+            </div>
+          </div>
+          <!-- sección para meetodo de entraga -->
+          <div class="container padding-bottom-3x mb-1" *ngIf=" item.tipoEntrega.costoEnvio>0; else menor" >
+            <!-- Alert-->
+             <div
+              class="alert alert-info alert-dismissible fade show text-center"
+              style="margin-bottom: 30px"
+            >
+              <span class="alert-close" data-dismiss="alert"></span
+              >&nbsp;&nbsp;¡Revisa tus datos de envío antes de realizar la
+              compra! - <strong> Amabisca</strong> , gracias por preferirnos.
+            </div>
+            <!-- Shopping Cart-->
+            
+            <div class="shopping-cart-footer">
+              <div class="column"></div>
+              <div class="column">
+                Cliente: <span class="text-medium"> </span>
+              </div>
+              &nbsp;
+              <div class="column">
+                <span class="text-medium"
+                  >{{ item.cliente.nombrePersona }}
+                  {{ item.cliente.apellidoPersona }}
+                </span>
+              </div>
+              &nbsp;
+            </div>
+            <div class="shopping-cart-footer">
+              <div class="column"></div>
+              <div class="column">
+                Dirección de Envío: <span class="text-medium"> </span>
+              </div>
+              &nbsp;
+              <div class="column">
+                <span class="text-medium"
+                  >{{ item.direccionEnvio.direccion }}
+                </span>
+              </div>
+              &nbsp;
+            </div>
+
+            <div class="shopping-cart-footer">
+              <div class="column"></div>
+              <div class="column">
+                Método de Entrega: <span class="text-medium"></span>
+              </div>
+              &nbsp;
+              <div class="column">
+                <span class="text-medium"
+                  >{{ item.tipoEntrega.nombreTipoEnvio }}
+                </span>
+              </div>
+              &nbsp;
+              
+            </div>
+            <div class="shopping-cart-footer">
+              <div class="column">
+                Costo de Entrega: <span class="text-medium"></span>
+              </div>
+              &nbsp;
+              <div class="column">
+                <span class="text-medium"
+                  >Q. {{ item.tipoEntrega.costoEnvio }}
+                </span>
+              </div>
+              &nbsp;
+            </div>
+          </div>
+
+         
+         <ng-template #menor>
+           <div
+              class="alert alert-info alert-dismissible fade show text-center"
+              style="margin-bottom: 30px"
+            >
+              <span class="alert-close" data-dismiss="alert"></span
+              >&nbsp;&nbsp;<strong> ¡Su pedido será entregado en Tienda!</strong> 
+            </div>
+         </ng-template>
+         
+            <div class="shopping-cart-footer">
+              <div class="column"></div>
+              <div class="column">
+                <strong> Total</strong> <span class="text-medium"> </span></div>
+              &nbsp;
+              <div class="column">
+                <span class="text-medium"><strong>Q. {{ item.total }} </strong></span>
+              </div>
+              &nbsp;
+            </div>
+         <div class="shopping-cart-footer">
+              <div class="column">
+                <a class="btn btn-outline-secondary" (click)="closeModal()"
+                  ><i class="icon-arrow-left"></i>&nbsp;Regresar a Carrito de
+                  Compras</a
+                >
+              </div>
+              <div class="column">
+                
+                <a class="btn btn-success" (click)="payment()">Realizar Pago</a>
+              </div>
+            </div>
+         
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

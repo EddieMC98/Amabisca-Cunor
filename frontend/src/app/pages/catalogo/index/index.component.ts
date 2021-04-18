@@ -1,8 +1,12 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from "@nebular/theme";
+import { NbToastStatus } from "@nebular/theme/components/toastr/model";
+import { NbToastrConfig } from "@nebular/theme/components/toastr/toastr-config";
 import {
   ModalDismissReasons,
+  NgbActiveModal,
   NgbModal,
   NgbModalRef,
 } from "@ng-bootstrap/ng-bootstrap";
@@ -26,20 +30,24 @@ export class IndexComponent implements OnInit {
   private items: ProductoAux[];
   public item = new ProductoAux();
   public id_producto: number;
+  
   //Modal
   modalRef: NgbModalRef;
 
-  config: ToasterConfig;
-
-  position = "toast-top-right";
-  animationType = "fade";
-  timeout = 5000;
-  toastsLimit = 5;
+  //Empieza Configuración Toastr
+  config: NbToastrConfig;
+  index = 1;
+  destroyByClick = true;
+  duration = 2000;
+  hasIcon = true;
+  position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+  preventDuplicates = false;
+  //Termina Configuración Toastr
 
   constructor(
     private service: IndexService,
     private modalService: NgbModal,
-    private toasterService: ToasterService,
+    private toastrService: NbToastrService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private router: Router
@@ -59,6 +67,7 @@ export class IndexComponent implements OnInit {
         console.log(err);
       }
     );
+   
   }
 
   verDetalles(id: number) {}
@@ -77,17 +86,10 @@ export class IndexComponent implements OnInit {
         this.modalRef.componentInstance.esNuevo = false;
         this.modalRef.result.then(
           (data) => {
-            this.showToast("info", "Detalle Registro", data);
+            //this.showToast("info", "Detalle Registro", data);
             this.getAll();
           },
           (reason) => {
-            if (`${this.getDismissReason(reason)}` != "undefined") {
-              this.showToast(
-                "error",
-                "Error",
-                `${this.getDismissReason(reason)}`
-              );
-            }
             this.getAll();
           }
         );
@@ -98,34 +100,56 @@ export class IndexComponent implements OnInit {
       () => {}
     );
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "";
+
+  addProducto(producto: ProductoAux) {
+    let productos = [];
+    let bandera: boolean = true;
+    if (localStorage.getItem("Productos")) {
+      productos = JSON.parse(localStorage.getItem("Productos"));
+      bandera = false;
+      //IF PARA COMPROBAR SI YA EXISTE UN PRODUCTO
+      productos.forEach((element) => {
+        if (element.codProducto == producto.codProducto) {
+          this.showToast(NbToastStatus.WARNING, "Advertencia", "¡Este producto  ya esta en el carrito de compras!");
+          bandera = true;
+        }
+      });
+
+      if (bandera) {
+      } else {
+        productos = [producto, ...productos];
+        this.showToast(
+          NbToastStatus.SUCCESS,
+          "Registro",
+          "¡Se ha añadido el producto al carrito de compras!"
+        );
+      }
     } else {
-      return `${reason}`;
+      productos = [producto];
+      this.showToast(
+        NbToastStatus.SUCCESS,
+        "Registro",
+        "¡Se ha añadido el producto al carrito de compras!"
+      );
     }
+    localStorage.setItem("Productos", JSON.stringify(productos));
   }
 
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: true,
-      tapToDismiss: true,
-      preventDuplicates: true,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: true,
-      bodyOutputType: BodyOutputType.TrustedHtml,
+ 
+  //Empieza método Toastr
+  private showToast(type: NbToastStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: this.destroyByClick,
+      duration: this.duration,
+      hasIcon: this.hasIcon,
+      position: this.position,
+      preventDuplicates: this.preventDuplicates,
     };
-    this.toasterService.popAsync(toast);
+    const titleContent = title ? `. ${title}` : "";
+
+    this.index += 1;
+    this.toastrService.show(body, `${titleContent}`, config);
   }
+  //Termina método Toastr
 }

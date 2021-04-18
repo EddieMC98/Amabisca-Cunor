@@ -1,0 +1,197 @@
+<!-- <form [formGroup]="editarInfoForm"> -->
+<div class="modal-header">
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+              <br /><br />
+              <div class="author-card-profile">
+                <div class="author-card-avatar">
+                  <img
+                    src="http://localhost:5000/Resources/Images/{{
+                          item.imagenPerfil
+                        }}"
+                   style="width: 200px; height: 200px"
+                  />
+                </div>
+                <div class="author-card-details">
+                  <h3 style="color: black">
+                    {{ item.nombrePersona }} {{ item.apellidoPersona }}
+                  </h3>
+                  <!-- <h3 style="color:black;">NOMBRE COMPLETO</h3> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Profile Settings-->
+          <div class="col-lg-8 pb-5">
+            <div class="row">
+              <!-- Datos de Edición Inicio-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    type="hidden"
+                    id="codInformacionPersonal"
+                    [(ngModel)]="item.codInformacionPersonal"
+                  />
+                  <label for="nombre_persona">Nombres</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="nombrePersona"
+                    [(ngModel)]="item.nombrePersona"
+                    placeholder="Nombres"
+                    required=""
+                  />
+                </div>
+                <!-- <div style="color:red;" *ngIf="editarInfoForm.controls['nombre_persona'].hasError('required') && editarInfoForm.controls['nombre_persona'].touched">Los nombres del usuario son obligatorios.</div> -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="apellidoPersona">Apellidos</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="apellidoPersona"
+                    [(ngModel)]="item.apellidoPersona"
+                    placeholder="Apellidos"
+                    required=""
+                  />
+                  <!-- <input class="form-control" type="text" id="apellido_persona" placeholder="Apellidos" required=""> -->
+                </div>
+                <!-- <div style="color:red;" *ngIf="editarInfoForm.controls['apellido_persona'].hasError('required') && editarInfoForm.controls['apellido_persona'].touched">Los apellidos del usuario son obligatorios.</div> -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cui">CUI/DPI</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="cui"
+                    [(ngModel)]="item.cui"
+                    placeholder="CUI/DPI"
+                    required=""
+                  />
+                  <!-- <input class="form-control" type="text" id="cui" placeholder="CUI/DPI" required=""> -->
+                </div>
+                <!-- <div style="color:red;" *ngIf="editarInfoForm.controls['cui'].hasError('required') && editarInfoForm.controls['cui'].touched">El CUI/DPI de la persona es obligatorio.</div> -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="nit">NIT</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="nit"
+                    [(ngModel)]="item.nit"
+                    placeholder="NIT"
+                    required=""
+                  />
+                  <!-- <input class="form-control" type="text" id="nit" placeholder="NIT" required=""> -->
+                </div>
+                <!-- <div style="color:red;" *ngIf="editarInfoForm.controls['nit'].hasError('required') && editarInfoForm.controls['nit'].touched">El NIT de la persona es obligatorio.</div> -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="telefono"
+                    [(ngModel)]="item.telefono"
+                    placeholder="79523022"
+                    required=""
+                  />
+                  <!-- <input class="form-control" type="text" id="telefono" placeholder="79523022" required=""> -->
+                </div>
+                <!-- <div style="color:red;" *ngIf="editarInfoForm.controls['telefono'].hasError('required') && editarInfoForm.controls['telefono'].touched">El teléfono de la persona es obligatorio.</div> -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="direccion">Dirección</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="direccion"
+                    [(ngModel)]="item.direccion"
+                    placeholder="San Pedro Carchá, Alta Verapaz"
+                    required=""
+                  />
+                  <!-- <input class="form-control" type="text" id="direccion" placeholder="San Pedro Carchá, Alta Verapaz" required=""> -->
+                </div>
+                <!-- <div style="color:red;" *ngIf="editarInfoForm.controls['direccion'].hasError('required') && editarInfoForm.controls['direccion'].touched">La dirección de la persona es obligatoria.</div> -->
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="imagenPerfil">Imagen de Perfil</label>
+                  <!-- <input class="form-control" type="text" id="imagen_perfil"  [(ngModel)]="item.imagen_perfil" placeholder="Seleecione su imagen" required=""> -->
+                  <div class="author-card-avatar">
+                    <img
+                      [src]="imagenUrl"
+                      style="width: 150px; height: 150px"
+                    />
+                  </div>
+                  <!-- <input class="form-control" type="file" accept="image/*" (change)="uploadFile(file.files)" style="display: none;"  id="imagenPerfil" formControlName="imagenPerfil" name="imagenPerfil" placeholder="Seleecione su imagen" required=""> -->
+                  <!-- <input type="file" accept="image/*" class="form-control" id="imagenPerfil" formControlName="imagenPerfil" name="imagenPerfil" [(ngModel)]="item.imagenPerfil" (change)="uploadFile(file.files)" style="display: none;"  > -->
+                  <!-- <button type="button" class="btn btn-success" (click)="file.click()">Agregar Imagen</button> -->
+                  <input
+                    type="file"
+                    #file
+                    accept="image/*"
+                    class="form-control"
+                    id="imagenPerfil"
+                    name="imagenPerfil"
+                    (ngModel)="item.direccion"
+                    (change)="uploadFile(file.files)"
+                    style="display: none"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="file.click()"
+                  >
+                    Agregar Imagen
+                  </button>
+                </div>
+              </div>
+
+              <!-- Datos de Edición Final-->
+
+              <div class="col-12">
+                <hr class="mt-2 mb-3" />
+                <div class="d-flex flex-wrap align-items-center">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    (click)="prueba()"
+                  >
+                    Actualizar
+                  </button>
+                  &nbsp;&nbsp;
+                  <button
+                    class="btn btn-danger"
+                    type="button"
+                    (click)="closeModal()"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </form> -->

@@ -14,8 +14,9 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NbAuthJWTInterceptor } from "@nebular/auth";
 import { IndexService } from "../../@core/data/index.service";
 import { IndexModalComponent } from "./index/index-modal.component";
+import { NbToastrService } from "@nebular/theme";
 
-const components = [IndexComponent, IndexModalComponent];
+const components = [IndexComponent, IndexModalComponent,];
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ const components = [IndexComponent, IndexModalComponent];
     DatePipe,
     ToasterService,
     IndexService,
+    NbToastrService,
   ],
   entryComponents: [IndexComponent, IndexModalComponent],
 })

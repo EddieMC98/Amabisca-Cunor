@@ -18,7 +18,7 @@ namespace backend.Models
         public int CodUsuario { get; set; }
 
         public virtual TbInformacionPersonal CodInformacionPersonalNavigation { get; set; }
-        public virtual Usuario CodUsuarioNavigation { get; set; }
+        //public virtual Usuario CodUsuarioNavigation { get; set; }
         public virtual ICollection<TbClienteDireccionEnvio> TbClienteDireccionEnvio { get; set; }
         public virtual ICollection<TbPedido> TbPedido { get; set; }
     }

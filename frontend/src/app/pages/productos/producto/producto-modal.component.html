@@ -62,7 +62,7 @@
   <div class="col-sm-9">
       <div class="input-group input-group-sm">
           <img [src]="imagenUrl" style="width: 150px;height: 150px;">
-        <input type="file" #file class="form-control" id="imagenProducto" formControlName="imagenProducto" name="imagenProducto" [(ngModel)]="item.imagenProducto" (change)="uploadFile(file.files)" style="display: none;"  >
+        <input type="file" #file accept="image/*" class="form-control" id="imagenProducto" formControlName="imagenProducto" name="imagenProducto" [(ngModel)]="item.imagenProducto" (change)="uploadFile(file.files)" style="display: none;"  >
       <button type="button" class="btn btn-success" (click)="file.click()">Agregar Imagen</button>
       </div>
       <div style="color:red;" *ngIf="productForm.controls['imagenProducto'].hasError('required') && productForm.controls['imagenProducto'].touched">La imagen del producto es obligatoria.</div>

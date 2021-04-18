@@ -98,7 +98,7 @@ export class CategoriaComponent implements OnInit {
     console.log(query);
     this.source.setFilter([
       // fields we want to include in the search
-      {
+      { 
         field: 'nombreCategoria',
         search: query
       },

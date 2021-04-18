@@ -207,8 +207,7 @@ namespace backend.Models
                 entity.ToTable("tb_cliente");
 
                 entity.Property(e => e.CodCliente)
-                    .HasColumnName("cod_cliente")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_cliente");
 
                 entity.Property(e => e.CodInformacionPersonal).HasColumnName("cod_informacion_personal");
 
@@ -237,8 +236,7 @@ namespace backend.Models
                 entity.ToTable("tb_cliente_direccion_envio");
 
                 entity.Property(e => e.CodClienteDireccionEnvio)
-                    .HasColumnName("cod_cliente_direccion_envio")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_cliente_direccion_envio");
 
                 entity.Property(e => e.CodCliente).HasColumnName("cod_cliente");
 
@@ -335,8 +333,8 @@ namespace backend.Models
                 entity.ToTable("tb_direccion_envio");
 
                 entity.Property(e => e.CodDireccionEnvio)
-                    .HasColumnName("cod_direccion_envio")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_direccion_envio");
+                    
 
                 entity.Property(e => e.Direccion)
                     .HasColumnName("direccion")
@@ -409,8 +407,7 @@ namespace backend.Models
                 entity.ToTable("tb_informacion_personal");
 
                 entity.Property(e => e.CodInformacionPersonal)
-                    .HasColumnName("cod_informacion_personal")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_informacion_personal");
 
                 entity.Property(e => e.ApellidoPersona)
                     .HasColumnName("apellido_persona")
