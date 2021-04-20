@@ -15,7 +15,7 @@
                 <div class="col-md-12">
                   <div class="invoice-wrapper">
                     <div class="intro">
-                      Hola <strong>{{nombreCliente }}</strong
+                      Pedido de <strong>{{nombreCliente }}</strong
                       >,
                       <br />
                       Este es el recibo de un pago de
@@ -94,17 +94,27 @@
             <br>
           </div>
           <br>
-          <div *ngIf="estado !== 0" class="text-right">
+          <div  class="text-right">
                   <button
-                    
+                    *ngIf="estado !== 0"
                     class="btn btn-success font-size-sm"
                     (click)="confirmarPedido()"
                     
                   >
                     <i class="fas fa-edit"></i>&nbsp;PEDIDO ENTREGADO
                   </button>
+                  &nbsp;
+                  &nbsp;
+                  <button
+                    
+                    class="btn btn-info font-size-sm"
+                    (click)="imprimir()"
+                    
+                  >
+                    <i class="fas fa-print"></i>&nbsp;IMPRIMIR
+                  </button>
                   </div>
-          
+                  
         </nb-card-body>
       </nb-card>
     </div>

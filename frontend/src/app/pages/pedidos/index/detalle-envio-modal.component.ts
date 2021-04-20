@@ -7,6 +7,7 @@ import { NumberCardComponent } from '@swimlane/ngx-charts';
 import { PedidoService } from '../../../@core/data/pedido.service';
 import { Pedido } from '../../../@core/modelos/pedido';
 import { DetallePedido } from '../../../@core/modelos/Varios/PedidosAux';
+import * as html2pdf from "html2pdf.js";
 
 @Component({
   selector: "ngx-detalle-envio-modal",
@@ -34,32 +35,29 @@ export class DetalleEnvioModalComponent implements OnInit {
   public nombrePersona: string;
   public costoEnvio: number;
   public estado: number;
-  public pedido:Pedido;
+  public pedido: Pedido;
+  
   constructor(
     private activeModal: NgbActiveModal,
     private modalService: NgbModal,
     private toastrService: NbToastrService,
-    private service:PedidoService,
+    private service: PedidoService
   ) {}
 
   ngOnInit() {
-    this.pedido=new Pedido();
+    this.pedido = new Pedido();
     this.item = [];
   }
   prueba() {
     console.log(this.item);
   }
-  confirmarPedido(){
-    this.pedido.estadoEntrega="ENTREGADO";
+  confirmarPedido() {
+    this.pedido.estadoEntrega = "ENTREGADO";
     console.log(this.pedido);
-    
+
     this.service.updatePedido(this.pedido).subscribe(
       (data) => {
-         this.showToast(
-           NbToastStatus.SUCCESS,
-           "ENTREGA",
-           "¡PEDIDO ENTREGADO!"
-         );
+        this.showToast(NbToastStatus.SUCCESS, "ENTREGA", "¡PEDIDO ENTREGADO!");
         console.log(data);
         this.closeModal();
       },
@@ -68,7 +66,19 @@ export class DetalleEnvioModalComponent implements OnInit {
       },
       () => {}
     );
-    
+  }
+  imprimir() {
+     const options = {
+       filename:"AMA-"+this.pedido.codPedido+".pdf",
+       image: { type: "jpeg", quality: 1 },
+       html2canvas: { scale: 5 },
+       jsPDF: { orientation: "landscape" , format:'a3' },
+     };
+
+     const content: Element = document.getElementById("element-to-export");
+
+     html2pdf().from(content).set(options).save();
+
   }
 
   closeModal() {

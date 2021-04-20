@@ -43,7 +43,7 @@ export class IndexComponent implements OnInit {
 
   //Esto es variables RadioButton
   options = [
-    { value: "2", label: "Recoger en Tienda" },
+    // { value: "2", label: "Recoger en Tienda" },
     { value: "1", label: "Entrega a Domicilio" },
   ];
   option;

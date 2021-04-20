@@ -179,19 +179,20 @@
               </div>
               &nbsp;
             </div>
-         <div class="shopping-cart-footer">
-              <div class="column">
-                <a class="btn btn-outline-secondary" (click)="closeModal()"
+          <div class="shopping-cart-footer">
+              <div style="text-align:center;" >
+                
+               <ngx-paypal [config]="paypalConfig"></ngx-paypal>
+                <!-- <a class="btn btn-success" (click)="payment()">Realizar Pago</a> -->
+             
+              </div>
+            </div>
+            <div style="text-align:center">
+                <a class="btn btn-outline-info" (click)="closeModal()"
                   ><i class="icon-arrow-left"></i>&nbsp;Regresar a Carrito de
                   Compras</a
                 >
               </div>
-              <div class="column">
-               <ngx-paypal [config]="paypalConfig"></ngx-paypal>
-                <a class="btn btn-success" (click)="payment()">Realizar Pago</a>
-             
-              </div>
-            </div>
          
         </nb-card-body>
       </nb-card>

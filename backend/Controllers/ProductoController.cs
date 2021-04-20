@@ -214,6 +214,7 @@ namespace backend.Controllers
                                  join ma in _context.TbMarca on pr.CodMarca equals ma.CodMarca
                                  join um in _context.TbUnidadMedida on pr.CodUnidadMedida equals um.CodUnidadMedida
                                  join cat in _context.TbCategoria on pr.CodCategoria equals cat.CodCategoria
+                                 where pr.EstadoActivo == 1
                                  select new ProductoAux
                                  {
                                      CodProducto = pr.CodProducto,
