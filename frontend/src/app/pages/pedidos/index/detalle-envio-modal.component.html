@@ -1,0 +1,112 @@
+<div class="modal-header">
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-body>
+          <div class="receipt-content" id="element-to-export">
+            <div class="container bootstrap snippets bootdey">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="invoice-wrapper">
+                    <div class="intro">
+                      Hola <strong>{{nombreCliente }}</strong
+                      >,
+                      <br />
+                      Este es el recibo de un pago de
+                      <strong>Q. {{montoTotal }}</strong> (GTQ) por la
+                      compra de artículos en Amabisca.
+                    </div>
+
+                    <div class="payment-info">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span>Transacción No.</span>
+                          <strong>{{transaccionID }}</strong>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                          <span>Fecha de Pago</span>
+                          <strong>{{fechaPedido }}</strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="payment-details">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span>Cliente</span>
+                          <strong> {{nombrePersona }} </strong>
+                          <p>
+                            {{clienteDireccionEnvio }}
+                          </p>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                          <span>Pago para:</span>
+                          <strong> Amabisca </strong>
+                          <p>
+                            San Pedro Carchá <br />
+                            Alta Verazaz <br />
+                            16009 <br />
+                            Guatemala<br />
+                            <a><strong>amabiscacunor@gmail.com</strong> </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="line-items">
+                      <div class="headers clearfix">
+                        <div class="row">
+                          <div class="col-md-6">Descripción</div>
+                          <div class="col-md-1">Cantidad</div>
+                          <div class="col-md-3 text-right">Precio Unitario</div>
+                          <div class="col-md-2">Monto Total</div>
+                        </div>
+                      </div>
+                      <div class="items">
+                        <div class="row item" *ngFor="let pr of item">
+                          <div class="col-md-6 desc">{{ pr.nProducto }}</div>
+                          <div class="col-md-1 qty text-right">{{ pr.cantidad }}</div>
+                          <div class="col-md-3 amount text-right">Q {{ pr.precioVenta }}</div>
+                          <div class="col-md-2 amount text-right">Q {{ pr.precioVenta * pr.cantidad }}</div>
+                        </div>
+                      </div>
+                      <div class="total text-right" >
+                        <div class="field">Subtotal<span> Q.</span> {{montoTotal - costoEnvio}}</div>
+                        <div class="field">
+                          Envío <span>Q{{costoEnvio }}</span>
+                        </div>
+
+                        <div class="field grand-total">
+                          Total <span>Q{{ montoTotal }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+          <br>
+          <div *ngIf="estado !== 0" class="text-right">
+                  <button
+                    
+                    class="btn btn-success font-size-sm"
+                    (click)="confirmarPedido()"
+                    
+                  >
+                    <i class="fas fa-edit"></i>&nbsp;PEDIDO ENTREGADO
+                  </button>
+                  </div>
+          
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+
 <div class="modal-header">
   <span>{{ modalHeader }}</span>
   <button class="close" aria-label="Close" (click)="closeModal()">
@@ -186,8 +187,9 @@
                 >
               </div>
               <div class="column">
-                
+               <ngx-paypal [config]="paypalConfig"></ngx-paypal>
                 <a class="btn btn-success" (click)="payment()">Realizar Pago</a>
+             
               </div>
             </div>
          

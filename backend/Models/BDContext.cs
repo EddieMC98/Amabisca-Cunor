@@ -26,6 +26,7 @@ namespace backend.Models
         public virtual DbSet<TbDetalleInventario> TbDetalleInventario { get; set; }
         public virtual DbSet<TbDetallePedido> TbDetallePedido { get; set; }
         public virtual DbSet<TbDireccionEnvio> TbDireccionEnvio { get; set; }
+        public virtual DbSet<TbDivisa> TbDivisa { get; set; }
         public virtual DbSet<TbEmpleado> TbEmpleado { get; set; }
         public virtual DbSet<TbFactura> TbFactura { get; set; }
         public virtual DbSet<TbInformacionPersonal> TbInformacionPersonal { get; set; }
@@ -36,6 +37,7 @@ namespace backend.Models
         public virtual DbSet<TbProducto> TbProducto { get; set; }
         public virtual DbSet<TbProveedor> TbProveedor { get; set; }
         public virtual DbSet<TbTipoEnvio> TbTipoEnvio { get; set; }
+        public virtual DbSet<TbTransaccion> TbTransaccion { get; set; }
         public virtual DbSet<TbUnidadMedida> TbUnidadMedida { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
@@ -105,7 +107,7 @@ namespace backend.Models
 
                 entity.Property(e => e.orden).HasColumnName("orden");
 
-                
+
             });
 
             modelBuilder.Entity<Permiso>(entity =>
@@ -131,9 +133,9 @@ namespace backend.Models
                     .HasColumnName("fec_creacion")
                     .HasColumnType("date");
 
-                
 
-                
+
+
             });
 
             modelBuilder.Entity<Rol>(entity =>
@@ -180,7 +182,7 @@ namespace backend.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Reftb_informacion_personal34");
 
-            }); 
+            });
 
             modelBuilder.Entity<TbCategoria>(entity =>
             {
@@ -225,7 +227,7 @@ namespace backend.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Reftb_informacion_personal27");
 
-                
+
             });
 
             modelBuilder.Entity<TbClienteDireccionEnvio>(entity =>
@@ -303,8 +305,7 @@ namespace backend.Models
                 entity.ToTable("tb_detalle_pedido");
 
                 entity.Property(e => e.CodDetallePedido)
-                    .HasColumnName("cod_detalle_pedido")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_detalle_pedido");
 
                 entity.Property(e => e.Cantidad).HasColumnName("cantidad");
 
@@ -334,11 +335,36 @@ namespace backend.Models
 
                 entity.Property(e => e.CodDireccionEnvio)
                     .HasColumnName("cod_direccion_envio");
-                    
+
 
                 entity.Property(e => e.Direccion)
                     .HasColumnName("direccion")
                     .HasMaxLength(250);
+            });
+
+            modelBuilder.Entity<TbDivisa>(entity =>
+            {
+                entity.HasKey(e => e.CodDivisa)
+                    .HasName("tb_divisa_pkey");
+
+                entity.ToTable("tb_divisa");
+
+                entity.Property(e => e.CodDivisa)
+                    .HasColumnName("cod_divisa")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FechaCreacion)
+                   .HasColumnName("fecha_creacion")
+                   .HasColumnType("date");
+
+                entity.Property(e => e.FechaModificacion)
+                                   .HasColumnName("fecha_modificacion")
+                                   .HasColumnType("date");
+
+
+                entity.Property(e => e.TipoCambio)
+                    .HasColumnName("tipo_cambio")
+                    .HasColumnType("numeric(10,2)");
             });
 
             modelBuilder.Entity<TbEmpleado>(entity =>
@@ -372,7 +398,7 @@ namespace backend.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Reftb_informacion_personal33");
 
-                
+
             });
 
             modelBuilder.Entity<TbFactura>(entity =>
@@ -510,8 +536,7 @@ namespace backend.Models
                 entity.ToTable("tb_pedido");
 
                 entity.Property(e => e.CodPedido)
-                    .HasColumnName("cod_pedido")
-                    .ValueGeneratedNever();
+                    .HasColumnName("cod_pedido");
 
                 entity.Property(e => e.CodCliente).HasColumnName("cod_cliente");
 
@@ -681,6 +706,27 @@ namespace backend.Models
                     .HasMaxLength(250);
             });
 
+            modelBuilder.Entity<TbTransaccion>(entity =>
+           {
+               entity.HasKey(e => e.CodTransaccion)
+                   .HasName("tb_transaccion_pkey");
+
+               entity.ToTable("tb_transaccion");
+
+               entity.Property(e => e.CodTransaccion)
+                   .HasColumnName("cod_transaccion");
+
+               entity.Property(e => e.FechaCreacion)
+                  .HasColumnName("fecha_creacion")
+                  .HasColumnType("date");
+
+               entity.Property(e => e.CodPedido).HasColumnName("cod_pedido");
+
+               entity.Property(e => e.TransaccionId).HasColumnName("transaccion_id").HasMaxLength(250);
+               
+           });
+
+
             modelBuilder.Entity<TbUnidadMedida>(entity =>
             {
                 entity.HasKey(e => e.CodUnidadMedida)
@@ -733,7 +779,7 @@ namespace backend.Models
                     .HasColumnName("token")
                     .HasMaxLength(300);
 
-                
+
             });
 
             OnModelCreatingPartial(modelBuilder);

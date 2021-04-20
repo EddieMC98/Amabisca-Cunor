@@ -170,6 +170,20 @@ namespace backend.Controllers
 
             return await lstDirecciones.ToListAsync();
         }
-    
+
+
+        [HttpGet("direccionCliente/{CodCliente}/{direccionEnvio}")]
+        public async Task<IEnumerable<TbClienteDireccionEnvio>> GetTbClienteDireccionEnvio(int CodCliente, int direccionEnvio)
+        {
+
+            var consulta = from p in _context.TbClienteDireccionEnvio
+                            where p.CodCliente == CodCliente && p.CodDireccionEnvio== direccionEnvio
+                            select new TbClienteDireccionEnvio{
+                                CodCliente = p.CodCliente,
+                                CodDireccionEnvio = p.CodDireccionEnvio,
+                                CodClienteDireccionEnvio = p.CodClienteDireccionEnvio
+                            };
+            return await consulta.ToListAsync();
+        }
     }
 }

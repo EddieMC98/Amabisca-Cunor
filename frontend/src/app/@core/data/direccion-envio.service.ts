@@ -1,18 +1,21 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { APPCONFIG } from '../constantes.module';
-import { DireccionEnvio } from '../modelos/direeccion-envio';
-import {DireccionClienteEnvio} from '../modelos/direccion-cliente-envio'
-import { Cliente } from '../modelos/cliente';
-import { TipoEnvio } from '../modelos/tipoenvio';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { APPCONFIG } from "../constantes.module";
+import { DireccionEnvio } from "../modelos/direeccion-envio";
+import { DireccionClienteEnvio } from "../modelos/direccion-cliente-envio";
+import { Cliente } from "../modelos/cliente";
+import { TipoEnvio } from "../modelos/tipoenvio";
 
 @Injectable({
   providedIn: "root",
 })
 export class DireccionEnvioService {
-  
   url = APPCONFIG.BASE_URL + "direccionenvio";
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -98,5 +101,23 @@ export class DireccionEnvioService {
     }
     // return an observable with a user-facing error message
     return throwError(msj);
+  }
+
+  getClienteDireccion(
+    codDireccionEnvio: number,
+    codCliente: number
+  ): Observable<DireccionClienteEnvio[]> {
+    return this.http
+      .get<any>(
+        this.url +
+          "/direccionCliente" +
+          `/${codCliente}` +
+          `/${codDireccionEnvio}`
+      )
+      .pipe(
+        catchError((err) =>
+          this.handleError(err, "Error al obtener la dirección de envío")
+        )
+      );
   }
 }

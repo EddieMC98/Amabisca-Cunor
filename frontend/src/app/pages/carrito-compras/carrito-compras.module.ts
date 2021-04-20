@@ -20,6 +20,9 @@ import { DireccionEnvioService } from "../../@core/data/direccion-envio.service"
 import { NbRadioModule } from "@nebular/theme";
 import { IndexModalComponent } from './index/index-modal.component';
 import { PaymentModalComponent } from './index/payment-modal.component';
+import { NgxPayPalModule } from "ngx-paypal";
+import { TipoCambioService } from "../../@core/data/tipo-cambio.service";
+import { PedidoService } from "../../@core/data/pedido.service";
 
 const components = [IndexComponent, IndexModalComponent, PaymentModalComponent,];
 
@@ -33,6 +36,7 @@ const components = [IndexComponent, IndexModalComponent, PaymentModalComponent,]
     Ng2SmartTableModule,
     ToasterModule,
     NbRadioModule,
+    NgxPayPalModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
@@ -43,7 +47,9 @@ const components = [IndexComponent, IndexModalComponent, PaymentModalComponent,]
     UsuarioService,
     DireccionEnvioService,
     ToasterService,
+    TipoCambioService,
+    PedidoService,
   ],
-  entryComponents: [IndexComponent, IndexModalComponent, PaymentModalComponent,],
+  entryComponents: [IndexComponent, IndexModalComponent, PaymentModalComponent],
 })
 export class CarritoComprasModule {}

@@ -44,6 +44,14 @@ const routes: Routes = [
           "./informacion-personal/informacion-personal.module#InformacionPersonalModule",
       },
       {
+        path: "tipo-cambio",
+        loadChildren: "./tipo-cambio/tipo-cambio.module#TipoCambioModule",
+      },
+      {
+        path: "pedidos",
+        loadChildren: "./pedidos/pedidos.module#PedidosModule",
+      },
+      {
         path: "",
         redirectTo: "dashboard",
         pathMatch: "full",

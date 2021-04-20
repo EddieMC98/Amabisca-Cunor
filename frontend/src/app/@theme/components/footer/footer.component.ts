@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'ngx-footer',
   styleUrls: ['./footer.component.scss'],
   template: `
-  <span class="created-by">FAVIO REQUENA - EDDIE MACZ - RENATO REQUENA - CUNOR - <b><a target="_blank">AMABISCA</a></b></span>
+  <span class="created-by">FAVIO REQUENA - EDDIE MACZ - RENATO REQUENA - HEYWEL CASTELLANOS - CUNOR - <b><a target="_blank">AMABISCA</a></b></span>
   `,
 })
 export class FooterComponent {

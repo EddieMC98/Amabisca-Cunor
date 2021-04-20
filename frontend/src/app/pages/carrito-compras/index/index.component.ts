@@ -20,6 +20,9 @@ import { ListaCarrito } from "../../../@core/modelos/Varios/lista-carrito";
 import { environment } from "../../../../environments/environment";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { IndexModalComponent } from "./index-modal.component";
+import { TipoCambioService } from "../../../@core/data/tipo-cambio.service";
+import { PedidoService } from "../../../@core/data/pedido.service";
+import { PedidoAux } from "../../../@core/modelos/pedido-aux";
 
 @Component({
   selector: "ngx-index",
@@ -34,6 +37,7 @@ export class IndexComponent implements OnInit {
 
   //Lista Para el carrito
   public lstCarrito = new ListaCarrito();
+  public pedidoAux = new PedidoAux();
   public bandera_comprar: boolean;
   //
 
@@ -68,7 +72,9 @@ export class IndexComponent implements OnInit {
     private service: DireccionEnvioService,
     private service_aux: UsuarioService,
     private service_clint: InfoPersonalService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private serviceDivisa: TipoCambioService,
+    private serviceDE: DireccionEnvioService,
   ) {}
 
   ngOnInit() {
@@ -202,7 +208,7 @@ export class IndexComponent implements OnInit {
   //Comprar
   comprar() {
     this.bandera_comprar = true;
-    
+
     if (this.option == undefined) {
       this.bandera_comprar = false;
       this.showToast(
@@ -240,7 +246,7 @@ export class IndexComponent implements OnInit {
 
     if (this.bandera_comprar) {
       this.lstCarrito.lstProducto = this.lstProducto;
-      this.lstCarrito.total=this.total;
+      this.lstCarrito.total = this.total;
       this.showToast(NbToastStatus.SUCCESS, "COMPRAR", "¡SI PUEDE COMPRAR!");
       this.openModal();
     } else {
@@ -255,21 +261,55 @@ export class IndexComponent implements OnInit {
       container: "nb-layout",
     });
 
-    
-        this.modalRef.componentInstance.modalHeader ="Pedido";
-        this.modalRef.componentInstance.item = this.lstCarrito;
-        this.modalRef.componentInstance.lstProducto= this.lstCarrito.lstProducto;
+    this.modalRef.componentInstance.modalHeader = "Pedido";
+    this.modalRef.componentInstance.item = this.lstCarrito;
+    this.modalRef.componentInstance.lstProducto = this.lstCarrito.lstProducto;
+    this.pedidoAux.lstProductos = this.lstCarrito.lstProducto;
+    this.pedidoAux.montoTotal = this.lstCarrito.total;
 
-        
-        this.modalRef.result.then(
-          (data) => {
-            //this.getAll();
-          },
-          (reason) => {
-            //this.getAll();
-          }
-        );
-      
+    this.modalRef.componentInstance.itemAux = this.pedidoAux;
+    this.service_aux.findByIdPerfil().subscribe(
+      (data) => {
+        this.service_clint.getCliente(data.cod_usuario).subscribe((data2) => {
+          this.modalRef.componentInstance.codCliente = data2[0].codCliente;
+          this.serviceDE
+            .getClienteDireccion(
+              this.lstCarrito.direccionEnvio.codDireccionEnvio,
+              data2[0].codCliente
+            )
+            .subscribe((data3) => {
+              this.modalRef.componentInstance.codClienteDireccionEnvio =
+                data3[0].codClienteDireccionEnvio;
+            });
+        });
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {}
+    );
+
+    this.serviceDivisa.getDivisa(1).subscribe(
+      (data) => {
+        this.modalRef.componentInstance.tipoCambio_ = data.tipoCambio;
+        this.modalRef.componentInstance.totalDolares = (
+          this.lstCarrito.total / data.tipoCambio
+        ).toFixed(2);
+      },
+      (error) => {
+        //console.log(error);
+      },
+      () => {}
+    );
+
+    this.modalRef.result.then(
+      (data) => {
+        //this.getAll();
+      },
+      (reason) => {
+        //this.getAll();
+      }
+    );
   }
   //
   //Método para ver las empresas de envío de paquetería
