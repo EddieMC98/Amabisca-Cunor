@@ -30,9 +30,29 @@ export class IndexService {
         )
       );
   }
+  // lstProductoCatalogoNombre;
+  verProductosPorNombre(nombre: string): Observable<ProductoAux[]> {
+    return this.http.get<ProductoAux[]>(
+      this.url + "/lstProductoCatalogoNombre/" + nombre
+    );
+  }
   verProducto(id: number): Observable<ProductoAux[]> {
     return this.http.get<ProductoAux[]>(
       APPCONFIG.BASE_URL + "producto/lstProductoCatalogo/" + id
+    );
+  }
+
+  verProductoFiltros(
+    categoria: string,
+    marca: string,
+    unidad: string
+  ): Observable<ProductoAux[]> {
+    return this.http.get<ProductoAux[]>(
+      APPCONFIG.BASE_URL +
+        "producto/lstProductoCatalogoFiltro/" +
+        `${categoria}` +
+        `/${marca}` +
+        `/${unidad}`
     );
   }
 

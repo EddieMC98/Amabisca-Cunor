@@ -345,3 +345,32 @@ body {
   padding: 20px;
   font-weight: 400;
 }
+
+.my-pagination ::ng-deep .ngx-pagination .current{
+  font-family: Material-Design-Iconic-Font;
+  background-color:rgba(0, 0, 0, 0.5);
+  color:black;
+}
+
+.paginate{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.input{
+  text-align: center;
+}
+
+.button, .input{
+border: none;
+margin-right: 2px;
+width: 30px;
+height: 30px;
+}
+
+small{
+  font-style: italic;
+  opacity: .3;
+  margin-right: 10px;
+}

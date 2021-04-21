@@ -232,7 +232,95 @@ namespace backend.Controllers
 
             return await lstProductoAux.ToListAsync();
         }
+        [AllowAnonymous]
+        // GET: api/Producto
+        [HttpGet("lstProductoCatalogoNombre/{nombre}")]
+        public async Task<ActionResult<IEnumerable<ProductoAux>>> GetTbProductoCatalogoPorNombre(string nombre)
+        {
+            var lstProductoAux = from pr in _context.TbProducto
+                                 join ma in _context.TbMarca on pr.CodMarca equals ma.CodMarca
+                                 join um in _context.TbUnidadMedida on pr.CodUnidadMedida equals um.CodUnidadMedida
+                                 join cat in _context.TbCategoria on pr.CodCategoria equals cat.CodCategoria
+                                 where pr.EstadoActivo == 1 && pr.NombreProducto.ToLower().Contains(nombre.ToLower())
+                                 select new ProductoAux
+                                 {
+                                     CodProducto = pr.CodProducto,
+                                     NombreProducto = pr.NombreProducto,
+                                     CodigoProducto = pr.CodigoProducto,
+                                     DetalleProducto = pr.DetalleProducto,
+                                     Marca = ma.NombreMarca,
+                                     Categoria = cat.NombreCategoria,
+                                     PrecioVenta = pr.PrecioVenta,
+                                     ImagenProducto = pr.ImagenProducto,
+                                     UnidadMedida = um.NombreUnidadMedida,
+                                     EstadoActivo = pr.EstadoActivo
+                                 };
+            //List<ProductoAux> hola = lstProductoAux.ToList();
 
+            return await lstProductoAux.ToListAsync();
+        }
+        [HttpGet("lstProductoCatalogoFiltro/{categoria}/{marca}/{umed}")]
+        public async Task<ActionResult<IEnumerable<ProductoAux>>> GetTbProductoCatalogoFiltro(string categoria,string marca, string umed)
+        {
+            if(categoria==null){
+                categoria="";
+            }
+            if(marca==null){marca="";}
+            if (umed == null) { umed = ""; }
+
+            var lstProductoAux = from pr in _context.TbProducto
+                                 join ma in _context.TbMarca on pr.CodMarca equals ma.CodMarca
+                                 join um in _context.TbUnidadMedida on pr.CodUnidadMedida equals um.CodUnidadMedida
+                                 join cat in _context.TbCategoria on pr.CodCategoria equals cat.CodCategoria
+                                 where pr.EstadoActivo == 1 
+                                 select new ProductoAux
+                                 {
+                                     CodProducto = pr.CodProducto,
+                                     NombreProducto = pr.NombreProducto,
+                                     CodigoProducto = pr.CodigoProducto,
+                                     DetalleProducto = pr.DetalleProducto,
+                                     Marca = ma.NombreMarca,
+                                     Categoria = cat.NombreCategoria,
+                                     PrecioVenta = pr.PrecioVenta,
+                                     ImagenProducto = pr.ImagenProducto,
+                                     UnidadMedida = um.NombreUnidadMedida,
+                                     EstadoActivo = pr.EstadoActivo
+                                 };
+            //List<ProductoAux> hola = lstProductoAux.ToList();
+            Console.WriteLine("DATOS:");
+            if(!categoria.Equals("null") && !marca.Equals("null") && !umed.Equals("null")){
+                return await lstProductoAux.Where(x=> x.Marca==marca && x.Categoria==categoria && x.UnidadMedida==umed).ToListAsync();
+            }
+            else if(!categoria.Equals("null") && !marca.Equals("null") && umed.Equals("null")){
+                return await lstProductoAux.Where(x => x.Marca == marca && x.Categoria == categoria).ToListAsync();
+            }
+            else if (!categoria.Equals("null") && marca.Equals("null") && !umed.Equals("null"))
+            {
+                return await lstProductoAux.Where(x =>x.Categoria == categoria && x.UnidadMedida == umed).ToListAsync();
+            }
+            else if (categoria.Equals("null") && !marca.Equals("null") && !umed.Equals("null"))
+            {
+                return await lstProductoAux.Where(x => x.Marca == marca && x.UnidadMedida == umed).ToListAsync();
+            }
+            else if (categoria.Equals("null") && marca.Equals("null") && !umed.Equals("null"))
+            {
+                return await lstProductoAux.Where(x =>x.UnidadMedida == umed).ToListAsync();
+            }
+            else if (categoria.Equals("null") && !marca.Equals("null") && umed.Equals("null"))
+            {
+                return await lstProductoAux.Where(x => x.Marca == marca).ToListAsync();
+            }
+            else if (!categoria.Equals("null") && marca.Equals("null") && umed.Equals("null"))
+            {
+                return await lstProductoAux.Where(x => x.Categoria == categoria).ToListAsync();
+            }
+            else{
+                
+                return await lstProductoAux.ToListAsync();
+            }
+
+           
+        }
         [AllowAnonymous]
         // GET: api/Producto
         [HttpGet("lstProductoCatalogo/{id}")]

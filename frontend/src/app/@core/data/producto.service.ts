@@ -56,6 +56,8 @@ export class ProductoService {
       APPCONFIG.BASE_URL + "producto/lstProductoCatalogo/" + id
     );
   }
+
+  
   private handleError(error: HttpErrorResponse, msj: string) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

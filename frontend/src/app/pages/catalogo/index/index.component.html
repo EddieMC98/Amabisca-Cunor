@@ -16,10 +16,72 @@
               Productos Amabisca
             </h2>
           </nav>
-          <br /><br />
+          <br />
           <div class="container">
+             <!-- Busqueda -->
+             <div class="col-md-12">
+    <nb-layout-column class="colored-column-basic">
+      <nb-card accent="info">
+        <nb-card-body>
+                    <nb-search type="rotate-layout"></nb-search>
+          <!-- <nb-search type="modal-drop" tag="modal-drop"></nb-search> -->
+          <!-- <nb-checkbox status="success"[value]="checked" (change)="prueba($event)">Success Checkbox</nb-checkbox>
+          <nb-checkbox status="warning">Warning Checkbox</nb-checkbox>
+          <nb-checkbox status="danger">Danger Checkbox</nb-checkbox> -->
+          <br>
+          <br>
+          <br>
+          <div class="row">
+             <div class="col-md-3">
+              <nb-select placeholder="CATEGORÍA"  id="codCategoria" name="codCategoria" [(ngModel)]="codCat"  [ngModelOptions]="{standalone: true}" [(selected)]="selectedItem">
+                <nb-option value= ''>CATEGORÍA</nb-option>  
+                <nb-option *ngFor="let item of lstCategoria" value= {{item.nombreCategoria}}>{{item.nombreCategoria}}</nb-option>
+               </nb-select>
+            </div>
+             <div class="col-md-3">
+              <nb-select placeholder="MARCA" id="codMarca" name="codMarca" [(ngModel)]="codMar" [ngModelOptions]="{standalone: true}" value="">
+                <nb-option value= ''>MARCA</nb-option>    
+                <nb-option *ngFor="let item of lstMarca" value= {{item.nombreMarca}}>{{item.nombreMarca}}</nb-option>
+               </nb-select>
+            </div>
+            <div class="col-md-3">
+              <nb-select placeholder="UNIDAD DE MEDIDA" id="codUnidadMedida" name="codUnidadMedida" [(ngModel)]="codUM" [ngModelOptions]="{standalone: true}" value="">
+                <nb-option value= ''>UNIDAD DE MEDIDA</nb-option>    
+                <nb-option *ngFor="let item of lstUnidadMedida" value= {{item.nombreUnidadMedida}}>{{item.nombreUnidadMedida}}</nb-option>
+               </nb-select>
+            </div>
+
+            <div class="col-md-1">
+              <button class="btn btn-primary" (click)="filtrar()">
+                <i class="fas fa-search"></i>
+                 BUSCAR</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-info btn-block"(click)="getAll()"
+                >
+                <i class="fas fa-trash"></i>
+                  Limpiar Búsqueda</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </nb-layout-column>
+</div>
+           
+            <!-- Fin -->
             <div class="row clearfix">
-              <div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let pr of items">
+              <div
+                class="col-lg-3 col-md-4 col-sm-12"
+                *ngFor="
+                  let pr of items
+                    | paginate
+                      : {
+                          itemsPerPage: pageNumber,
+                          currentPage: page,
+                          totalItems: totalLength
+                        }
+                "
+              >
                 <div class="card product_item">
                   <div class="body">
                     <div class="cp_img">
@@ -82,6 +144,44 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="paginate">
+          <pagination-controls
+            class="text-center my-pagination"
+            (pageChange)="page = $event"
+            responsive="true"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page"
+          >
+          </pagination-controls>
+          <button class="btn btn-primary btn-xs waves-effect" (click)="dec()">
+            <i class="fas fa-minus"></i>
+          </button>
+          &nbsp; &nbsp;
+          <!-- <input class="input" [value]="pageNumber" /> -->
+          <button
+            class="btn btn-outline-secondary btn-xs waves-effect"
+            disabled
+            style="color: black"
+          >
+            {{ pageNumber }}
+          </button>
+          &nbsp; &nbsp;
+          <button class="btn btn-primary btn-xs waves-effect" (click)="inc()">
+            <i class="fas fa-plus"></i>
+          </button>
+          <!-- <button
+                          class="btn btn-primary btn-sm waves-effect"
+                          title="Agregar al carrito"
+                          (click)="addProducto(pr)"
+                        >
+                          <i class="fas fa-shopping-cart fa-lg"></i
+                          >&nbsp;Agregar al Carrito
+                        </button> -->
         </div>
       </nb-card-body>
     </nb-card>

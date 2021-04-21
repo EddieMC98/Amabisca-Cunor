@@ -14,7 +14,11 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NbAuthJWTInterceptor } from "@nebular/auth";
 import { IndexService } from "../../@core/data/index.service";
 import { IndexModalComponent } from "./index/index-modal.component";
-import { NbToastrService } from "@nebular/theme";
+import { NbSearchModule, NbSearchService, NbToastrService } from "@nebular/theme";
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { CategoriaService } from "../../@core/data/categoria.service";
+import { MarcaService } from "../../@core/data/marca.service";
+import { UnidadMedidaService } from "../../@core/data/unidad-medida.service";
 
 const components = [IndexComponent, IndexModalComponent,];
 
@@ -32,6 +36,8 @@ const components = [IndexComponent, IndexModalComponent,];
     ThemeModule,
     Ng2SmartTableModule,
     ToasterModule,
+    NgxPaginationModule,
+    NbSearchModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
@@ -39,6 +45,10 @@ const components = [IndexComponent, IndexModalComponent,];
     ToasterService,
     IndexService,
     NbToastrService,
+    NbSearchService,
+    CategoriaService,
+    MarcaService,
+    UnidadMedidaService,
   ],
   entryComponents: [IndexComponent, IndexModalComponent],
 })
