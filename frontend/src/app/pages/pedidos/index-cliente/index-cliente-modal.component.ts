@@ -38,6 +38,8 @@ export class IndexClienteModalComponent implements OnInit {
   public tipoEnvio: string;
   public nombrePersona: string;
   public costoEnvio: number;
+  public cui:string;
+  public nit:string;
  
   constructor(
     private activeModal: NgbActiveModal,

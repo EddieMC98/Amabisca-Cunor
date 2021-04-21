@@ -132,6 +132,9 @@ export class IndexComponent implements OnInit {
         this.modalRef.componentInstance.tipoEnvio = data[0].tipoEnvio;
         this.modalRef.componentInstance.costoEnvio = data[0].costoEnvio;
         this.modalRef.componentInstance.nombrePersona = data[0].nombrePersona;
+        this.modalRef.componentInstance.cui = data[0].cui;
+        this.modalRef.componentInstance.nit = data[0].nit;
+
         this.modalRef.componentInstance.pedido = value.data;
         if (data[0].estadoEntrega === "PROCESO") {
           this.modalRef.componentInstance.estado = 1;

@@ -22,6 +22,8 @@ namespace backend.Models
         public String NombrePersona { get; set; }
         public String TransaccionID { get; set; }
         public decimal? CostoEnvio { get; set; }
+        public String Nit{get;set;}
+        public String Cui{get;set;}
 
 
     }

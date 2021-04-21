@@ -183,7 +183,9 @@ namespace backend.Controllers
                               Cantidad = dp.Cantidad,
                               PrecioVenta = pr.PrecioVenta,
                               NombrePersona = inf.NombrePersona + " " + inf.ApellidoPersona,
-                              TransaccionID = tr.TransaccionId
+                              TransaccionID = tr.TransaccionId,
+                              Nit = inf.Nit,
+                              Cui = inf.Cui
                           };
 
 

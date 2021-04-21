@@ -36,6 +36,8 @@ export class DetalleEnvioModalComponent implements OnInit {
   public costoEnvio: number;
   public estado: number;
   public pedido: Pedido;
+  public nit:string;
+  public cui:string;
   
   constructor(
     private activeModal: NgbActiveModal,

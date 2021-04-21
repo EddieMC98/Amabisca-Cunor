@@ -1,23 +1,23 @@
 export class DetallePedido {
-  
   constructor() {
-      this.codPedido=0;
-      this.fechaPedido=new Date();
-      this.numeroPedido='';
-      this.montoTotal=0;
-      this.estadoEntrega='';
-      this.cliente='';
-      this.clienteDireccionEnvio='';
-      this.tipoEnvio='';
-      this.nProducto='';
-      this.cantidad=0;
-      this.precioVenta=0;
-      this.marca='';
-      this.categoria='';
-      this.nombrePersona='';
-      this.transaccionID='';
-      this.costoEnvio=0;
-
+    this.codPedido = 0;
+    this.fechaPedido = new Date();
+    this.numeroPedido = "";
+    this.montoTotal = 0;
+    this.estadoEntrega = "";
+    this.cliente = "";
+    this.clienteDireccionEnvio = "";
+    this.tipoEnvio = "";
+    this.nProducto = "";
+    this.cantidad = 0;
+    this.precioVenta = 0;
+    this.marca = "";
+    this.categoria = "";
+    this.nombrePersona = "";
+    this.transaccionID = "";
+    this.costoEnvio = 0;
+    this.cui = "";
+    this.nit = "";
   }
 
   codPedido: number;
@@ -36,4 +36,6 @@ export class DetallePedido {
   nombrePersona: string;
   transaccionID: string;
   costoEnvio: number;
+  cui: string;
+  nit: string;
 }
