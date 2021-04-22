@@ -10,7 +10,7 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
-        path: "dashboard",
+        path: "index",
         component: DashboardComponent,
       },
       {
@@ -53,7 +53,7 @@ const routes: Routes = [
       },
       {
         path: "",
-        redirectTo: "dashboard",
+        redirectTo: "index",
         pathMatch: "full",
       },
     ],

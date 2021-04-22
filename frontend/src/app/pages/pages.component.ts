@@ -33,7 +33,7 @@ export class PagesComponent {
         var inicio =  {
           title: 'Inicio',
           icon: 'fas fa-store',
-          link: '/pages/dashboard',
+          link: '/pages/index',
           home: true,
         };
         menus.push(inicio);
