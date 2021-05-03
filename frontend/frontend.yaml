@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: eddiemc98/amabiscaweb
+        image: eddiemc98/amabiscaweb:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
