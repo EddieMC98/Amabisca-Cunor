@@ -24,7 +24,7 @@ pipeline {
         stage('Building angular && Build and Push Docker Image'){
             steps{
                 
-             sh 'npm install && npm run ng build --prod --build-optimizer=false --aot=false'
+             sh 'npm install && ng build --prod --build-optimizer=false --aot=false'
              sh 'docker rmi eddiemc98/amabiscaweb'
              sh "docker build -t eddiemc98/amabiscaweb ." 
                 withDockerRegistry([ credentialsId: "eddie-dockerhub", url: "" ]) {
