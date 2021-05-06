@@ -1,12 +1,3 @@
-node('jnlp-slave') {
-    
-     stage('test pipeline') {
-        sh(script: """
-            echo "hello"
-           git clone https://github.com/EddieMC98/Amabisca-Cunor.git
-           cd ./Amabisca-Cunor/frontend
-           
-           docker build . -t eddiemc98/amabiscaweb
-        """)
-    }
+pipeline {
+    echo 'Hola Mundo'
 }
