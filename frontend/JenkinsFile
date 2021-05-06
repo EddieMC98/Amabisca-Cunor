@@ -1,10 +1,52 @@
 pipeline {
+    environment {
+        //once you sign up for Docker hub, use that user_id here
+        imagename = "eddiemc98/amabiscaweb"
+        
+        //- update your credentials ID after creating credentials for connecting to Docker Hub
+        registryCredential = 'eddie-dockerhub'
+        dockerImage = ''
+    }
+    tools{
+        nodejs 'NodeJS'
+    }
     agent any
-    stages {
-        stage('print') {
+   
+        stages {
+        stage('Pull the repository') {
             steps {
-                echo 'Hello World'
+                echo 'Pull repository successfully'
+                
+                
             }
         }
+        stage('Building angular && Build and Push Docker Image'){
+            steps{
+                
+             sh 'cd Amabisca-Cunor/frontend && npm install && npm run ng build --prod --build-optimizer=false --aot=false'
+             sh 'docker rmi eddiemc98/amabiscaweb'
+             sh "cd Amabisca-Cunor/frontend && docker build -t eddiemc98/amabiscaweb ." 
+                withDockerRegistry([ credentialsId: "eddie-dockerhub", url: "" ]) {
+                sh 'docker push eddiemc98/amabiscaweb:latest'
+               
+                }
+            }
+            
+        }
+        
+        
+        stage('Recreating pods'){
+            steps {
+                withKubeConfig([credentialsId: 'kubernetes-config']) {  
+                  sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
+                  sh 'chmod u+x ./kubectl'  
+                  sh './kubectl delete deployment frontend -n testfrontend'
+                  sh './kubectl apply -f Amabisca-Cunor/frontend/frontend.yaml -n testfrontend'
+                   
+                 }
+            }
+            
+        }
+        
     }
 }
