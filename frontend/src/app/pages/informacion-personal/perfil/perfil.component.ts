@@ -9,6 +9,7 @@ import { NbToastStatus } from "@nebular/theme/components/toastr/model";
 import { NbToastrConfig } from "@nebular/theme/components/toastr/toastr-config";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ToasterConfig } from "angular2-toaster";
+import { APPCONFIG } from "../../../@core/constantes.module";
 import { InfoPersonalService } from "../../../@core/data/info-personal.service";
 import { UsuarioService } from "../../../@core/data/usuarios.service";
 import { InfoPersonal } from "../../../@core/modelos/info-personal";
@@ -23,7 +24,7 @@ import { PerfilEditComponent } from "./perfil-edit.component";
 })
 export class PerfilComponent implements OnInit {
   modalRef: NgbModalRef;
-
+  url = APPCONFIG.BASE_URL_IMG + "";
   config: ToasterConfig;
   formPerfil: boolean = true;
   formEditarPerfil: boolean = false;
@@ -44,7 +45,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     //when component loading get all users and set the users[]
     this.getAll();
-    
+
       }
 
   getAll() {
@@ -107,17 +108,17 @@ export class PerfilComponent implements OnInit {
 
     this.serviceInfo.getInfo(this.codUsuario).subscribe(
       (items) => {
-       
+
         this.modalRef.componentInstance.modalHeader ="Editar Información Personal";
         this.modalRef.componentInstance.codUsuario = this.codUsuario;
-        
+
         if (items[0]) {
           this.modalRef.componentInstance.bandera=true;
            this.direccionImagen = items[0].imagenPerfil;
           this.modalRef.componentInstance.item=items[0];
-          
+
         } else {
-         
+
           this.modalRef.componentInstance.bandera = false;
           this.modalRef.componentInstance.item = new InfoPersonal();
         }
@@ -126,7 +127,7 @@ export class PerfilComponent implements OnInit {
             this.getAll();
           },
           (reason) => {
-            
+
             this.getAll();
           }
         );
@@ -136,9 +137,9 @@ export class PerfilComponent implements OnInit {
       }
     );
 
-    
-    
+
+
   }
 
-  
+
 }

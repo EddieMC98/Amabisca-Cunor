@@ -23,6 +23,7 @@ import { IndexModalComponent } from "./index-modal.component";
 import { TipoCambioService } from "../../../@core/data/tipo-cambio.service";
 import { PedidoService } from "../../../@core/data/pedido.service";
 import { PedidoAux } from "../../../@core/modelos/pedido-aux";
+import { APPCONFIG } from "../../../@core/constantes.module";
 
 @Component({
   selector: "ngx-index",
@@ -40,7 +41,7 @@ export class IndexComponent implements OnInit {
   public pedidoAux = new PedidoAux();
   public bandera_comprar: boolean;
   //
-
+  url = APPCONFIG.BASE_URL_IMG + "";
   //Esto es variables RadioButton
   options = [
     // { value: "2", label: "Recoger en Tienda" },

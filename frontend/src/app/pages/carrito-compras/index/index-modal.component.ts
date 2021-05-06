@@ -22,7 +22,7 @@ import { Transaccion } from "../../../@core/modelos/transaccion";
 import { ListaCarrito } from "../../../@core/modelos/Varios/lista-carrito";
 import { ProductoAux } from "../../../@core/modelos/Varios/producto-aux";
 import { PaymentModalComponent } from "./payment-modal.component";
-
+//import { APPCONFIG } from '../constantes.module';
 @Component({
   selector: "ngx-index-modal",
   templateUrl: "./index-modal.component.html",
@@ -83,8 +83,8 @@ export class IndexModalComponent implements OnInit {
       "PAGO COMPLETADO",
       "¡Gracias por su compra!"
     );
-    
-    
+
+
     //tranService
     localStorage.removeItem("Productos");
     this.router.navigate(["pages/catalogo/index"]);
@@ -198,7 +198,7 @@ export class IndexModalComponent implements OnInit {
           },
           () => {}
         );
-       
+
       },
       (error) => {
         console.log(error);

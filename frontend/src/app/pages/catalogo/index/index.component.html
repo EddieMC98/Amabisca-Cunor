@@ -34,19 +34,19 @@
           <div class="row">
              <div class="col-md-3">
               <nb-select placeholder="CATEGORÍA"  id="codCategoria" name="codCategoria" [(ngModel)]="codCat"  [ngModelOptions]="{standalone: true}" [(selected)]="selectedItem">
-                <nb-option value= ''>CATEGORÍA</nb-option>  
+                <nb-option value= ''>CATEGORÍA</nb-option>
                 <nb-option *ngFor="let item of lstCategoria" value= {{item.nombreCategoria}}>{{item.nombreCategoria}}</nb-option>
                </nb-select>
             </div>
              <div class="col-md-3">
               <nb-select placeholder="MARCA" id="codMarca" name="codMarca" [(ngModel)]="codMar" [ngModelOptions]="{standalone: true}" value="">
-                <nb-option value= ''>MARCA</nb-option>    
+                <nb-option value= ''>MARCA</nb-option>
                 <nb-option *ngFor="let item of lstMarca" value= {{item.nombreMarca}}>{{item.nombreMarca}}</nb-option>
                </nb-select>
             </div>
             <div class="col-md-3">
               <nb-select placeholder="UNIDAD DE MEDIDA" id="codUnidadMedida" name="codUnidadMedida" [(ngModel)]="codUM" [ngModelOptions]="{standalone: true}" value="">
-                <nb-option value= ''>UNIDAD DE MEDIDA</nb-option>    
+                <nb-option value= ''>UNIDAD DE MEDIDA</nb-option>
                 <nb-option *ngFor="let item of lstUnidadMedida" value= {{item.nombreUnidadMedida}}>{{item.nombreUnidadMedida}}</nb-option>
                </nb-select>
             </div>
@@ -67,7 +67,7 @@
       </nb-card>
     </nb-layout-column>
 </div>
-           
+
             <!-- Fin -->
             <div class="row clearfix">
               <div
@@ -86,7 +86,7 @@
                   <div class="body">
                     <div class="cp_img">
                       <img
-                        src="http://localhost:5000/Resources/Images/{{
+                        src="{{url}}Resources/Images/{{
                           pr.imagenProducto
                         }}"
                         alt="Product"

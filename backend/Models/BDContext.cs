@@ -46,7 +46,7 @@ namespace backend.Models
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=amabisca;Username=postgres;Password=QRdffq4312");
+                optionsBuilder.UseNpgsql("uid=postgres;password=QRdffq4312;server=159.89.46.10;port=5432;database=bd_amabisca_test;");
             }
         }
 

@@ -1,18 +1,22 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+RUN mkdir -p /app/resources
+RUN chmod 777 /app/resources/
 WORKDIR /app
 
+
+# Copy csproj and restore as distinct layers
 COPY *.csproj ./
 RUN dotnet restore
 
+# Copy everything else and build
 COPY . ./
+COPY Resources /app/Resources
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
 WORKDIR /app
 EXPOSE 80
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet","backend.dll"]
-
-
-bin\
-obj\
+COPY Resources /app/Resources
+COPY --from=build /app/out .
+ENTRYPOINT ["dotnet", "backend.dll"]

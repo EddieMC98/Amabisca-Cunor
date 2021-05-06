@@ -19,6 +19,7 @@ import {
 import { EventEmitter } from "events";
 import { formatDate } from "@angular/common";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { APPCONFIG } from "../../../@core/constantes.module";
 
 @Component({
   selector: "ngx-producto-modal",
@@ -29,6 +30,8 @@ export class ProductoModalComponent implements OnInit {
   //Video 1
   imagenUrl: string = "/assets/images/image-not-found.png";
   fileToUpload: File = null;
+
+  url = APPCONFIG.BASE_URL_IMG + "";
 
   //Video 2
   public archivo: Producto;
@@ -220,7 +223,7 @@ export class ProductoModalComponent implements OnInit {
     );
     console.log("Entra aqui x3");
     this.http
-      .post("http://localhost:5000/api/producto/Upload", formData, {
+      .post(this.url+"api/producto/Upload", formData, {
         reportProgress: true,
         observe: "events",
       })

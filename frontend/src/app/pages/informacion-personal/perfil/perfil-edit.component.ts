@@ -9,6 +9,7 @@ import {
 import { NbToastStatus } from "@nebular/theme/components/toastr/model";
 import { NbToastrConfig } from "@nebular/theme/components/toastr/toastr-config";
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { APPCONFIG } from '../../../@core/constantes.module';
 import { InfoPersonalService } from '../../../@core/data/info-personal.service';
 import { UsuarioService } from '../../../@core/data/usuarios.service';
 import { Usuario } from '../../../@core/modelos/usuario';
@@ -25,6 +26,7 @@ export class PerfilEditComponent implements OnInit {
   fecha: string;
   editarPerfilForm: FormGroup;
   direccionImagen:string;
+  url = APPCONFIG.BASE_URL_IMG + "";
   //Empieza Configuración Toastr
   config: NbToastrConfig;
   index = 1;

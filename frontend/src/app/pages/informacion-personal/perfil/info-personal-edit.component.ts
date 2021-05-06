@@ -7,6 +7,7 @@ import { NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@ne
 import { NbToastStatus } from '@nebular/theme/components/toastr/model';
 import { NbToastrConfig } from '@nebular/theme/components/toastr/toastr-config';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { APPCONFIG } from '../../../@core/constantes.module';
 import { InfoPersonalService } from '../../../@core/data/info-personal.service';
 import { Cliente } from '../../../@core/modelos/cliente';
 import { InfoPersonal } from '../../../@core/modelos/info-personal';
@@ -25,7 +26,7 @@ export class InfoPersonalEditComponent implements OnInit {
   public progress: number;
   public message: string;
   @Output() public onUploadFinished = new EventEmitter();
-
+  url = APPCONFIG.BASE_URL_IMG + "";
   codUsuario: number;
   public item = new InfoPersonal();
   public cliente = new Cliente();
@@ -88,13 +89,13 @@ export class InfoPersonalEditComponent implements OnInit {
           this.activeModal.close("Registro actualizado exitósamente");
           this.postCliente();
           this.showToast(NbToastStatus.PRIMARY, "Registro", "Registro Exitoso");
-          
+
         },
         (err) => {
           console.log(err);
         }
       );
-      
+
     } else {
       this.service.updateInfoPersonal(this.item).subscribe(
         (items) => {
@@ -170,7 +171,7 @@ export class InfoPersonalEditComponent implements OnInit {
     this.item.imagenPerfil = replace1 + fileToUpload.name + "";
     formData.append("imagenPerfil", fileToUpload, replace1 + fileToUpload.name);
     this.http
-      .post("http://localhost:5000/api/producto/Upload", formData, {
+      .post(this.url+"api/producto/Upload", formData, {
         reportProgress: true,
         observe: "events",
       })

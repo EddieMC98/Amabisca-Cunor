@@ -11,6 +11,7 @@ import { LocalDataSource } from "ng2-smart-table";
 import "style-loader!angular2-toaster/toaster.css";
 import { ProductoModalComponent } from "./producto-modal.component";
 import { ProductoAux } from "../../../@core/modelos/Varios/producto-aux";
+import { APPCONFIG } from "../../../@core/constantes.module";
 
 @Component({
   selector: "ngx-producto",
@@ -22,7 +23,7 @@ export class CProductoComponent implements OnInit {
   private items: ProductoAux[];
   public item = new ProductoAux();
   modalRef: NgbModalRef;
-
+  url = APPCONFIG.BASE_URL_IMG + "";
   config: ToasterConfig;
 
   position = "toast-top-right";
@@ -78,12 +79,12 @@ export class CProductoComponent implements OnInit {
         valuePrepareFunction: (value) => {
           return (
             '<img width="100px"; height="100px" src= ' +
-            "http://localhost:5000/Resources/Images/" +
+            this.url+"Resources/Images/" +
             value +
             "  />"
           );
         },
-        
+
       },
       detalleProducto: {
         title: "Descripción",

@@ -33,6 +33,7 @@ import { CategoriaService } from "../../../@core/data/categoria.service";
 import { UnidadMedida } from "../../../@core/modelos/unidad-medida";
 import { Marca } from "../../../@core/modelos/marca";
 import { Categoria } from "../../../@core/modelos/categoria";
+import { APPCONFIG } from "../../../@core/constantes.module";
 
 @Component({
   selector: "ngx-index",
@@ -44,7 +45,7 @@ export class IndexComponent implements OnInit {
   public item = new ProductoAux();
   public id_producto: number;
   selectedItem = "1";
-
+  url = APPCONFIG.BASE_URL_IMG + "";
   //Modal
   modalRef: NgbModalRef;
 

@@ -41,7 +41,7 @@
                       <div class="product-item">
                         <a class="product-thumb" href="#"
                           ><img
-                            src="http://localhost:5000/Resources/Images/{{
+                            src="{{BASE_URL_IMG}}Resources/Images/{{
                               prod.imagenProducto
                             }}"
                             alt="Product"
@@ -101,7 +101,7 @@
               compra! - <strong> Amabisca</strong> , gracias por preferirnos.
             </div>
             <!-- Shopping Cart-->
-            
+
             <div class="shopping-cart-footer">
               <div class="column"></div>
               <div class="column">
@@ -142,7 +142,7 @@
                 </span>
               </div>
               &nbsp;
-              
+
             </div>
             <div class="shopping-cart-footer">
               <div class="column">
@@ -158,17 +158,17 @@
             </div>
           </div>
 
-         
+
          <ng-template #menor>
            <div
               class="alert alert-info alert-dismissible fade show text-center"
               style="margin-bottom: 30px"
             >
               <span class="alert-close" data-dismiss="alert"></span
-              >&nbsp;&nbsp;<strong> ¡Su pedido será entregado en Tienda!</strong> 
+              >&nbsp;&nbsp;<strong> ¡Su pedido será entregado en Tienda!</strong>
             </div>
          </ng-template>
-         
+
             <div class="shopping-cart-footer">
               <div class="column"></div>
               <div class="column">
@@ -181,10 +181,10 @@
             </div>
           <div class="shopping-cart-footer">
               <div style="text-align:center;" >
-                
+
                <ngx-paypal [config]="paypalConfig"></ngx-paypal>
                 <!-- <a class="btn btn-success" (click)="payment()">Realizar Pago</a> -->
-             
+
               </div>
             </div>
             <div style="text-align:center">
@@ -193,7 +193,7 @@
                   Compras</a
                 >
               </div>
-         
+
         </nb-card-body>
       </nb-card>
     </div>

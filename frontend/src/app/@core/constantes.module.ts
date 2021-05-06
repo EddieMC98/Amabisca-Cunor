@@ -1,9 +1,16 @@
 export class ConstantesModule {
 }
 export interface ConstantesConfig {
-  BASE_URL:string
+  BASE_URL:string,
+  BASE_URL_IMG:string
 }
 
 export const APPCONFIG:ConstantesConfig = {
-  BASE_URL: 'http://localhost:5000/api/'
+  //LOCAL
+  //BASE_URL: 'http://localhost:5000/api/',
+  //BASE_URL_IMG: 'http://localhost:5000/'
+
+  //TEST
+  BASE_URL: 'http://localhost:8080/api/',
+  BASE_URL_IMG: 'http://localhost:8080/'
 };

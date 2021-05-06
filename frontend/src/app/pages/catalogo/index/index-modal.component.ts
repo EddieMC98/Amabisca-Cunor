@@ -13,6 +13,7 @@ import {
   ToasterConfig,
   ToasterService,
 } from "angular2-toaster";
+import { APPCONFIG } from "../../../@core/constantes.module";
 import { ProductoService } from "../../../@core/data/producto.service";
 import { ProductoAux } from "../../../@core/modelos/Varios/producto-aux";
 
@@ -27,7 +28,7 @@ export class IndexModalComponent implements OnInit {
   public item = new ProductoAux();
   modalHeader: string;
   public esNuevo: Boolean = false;
-
+  url = APPCONFIG.BASE_URL_IMG + "";
   //declaración de variables
   public idProducto: number;
   public listaCarrita = new ProductoAux();
