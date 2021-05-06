@@ -1,3 +1,10 @@
 pipeline {
-    echo 'Hola Mundo'
+    agent any
+    stages {
+        stage('print') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
 }
