@@ -16,6 +16,7 @@ pipeline {
         stage('Pull the repository') {
             steps {
                 echo 'Pull repository successfully'
+                sh 'pwd'
                 
                 
             }
@@ -23,9 +24,9 @@ pipeline {
         stage('Building angular && Build and Push Docker Image'){
             steps{
                 
-             sh 'cd Amabisca-Cunor/frontend && npm install && npm run ng build --prod --build-optimizer=false --aot=false'
+             sh 'npm install && npm run ng build --prod --build-optimizer=false --aot=false'
              sh 'docker rmi eddiemc98/amabiscaweb'
-             sh "cd Amabisca-Cunor/frontend && docker build -t eddiemc98/amabiscaweb ." 
+             sh "docker build -t eddiemc98/amabiscaweb ." 
                 withDockerRegistry([ credentialsId: "eddie-dockerhub", url: "" ]) {
                 sh 'docker push eddiemc98/amabiscaweb:latest'
                
@@ -41,7 +42,7 @@ pipeline {
                   sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
                   sh 'chmod u+x ./kubectl'  
                   sh './kubectl delete deployment frontend -n testfrontend'
-                  sh './kubectl apply -f Amabisca-Cunor/frontend/frontend.yaml -n testfrontend'
+                  sh './kubectl apply -f frontend.yaml -n testfrontend'
                    
                  }
             }
