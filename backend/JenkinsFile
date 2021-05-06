@@ -1,0 +1,46 @@
+pipeline {
+    environment {
+        //once you sign up for Docker hub, use that user_id here
+        imagename = "eddiemc98/apiamabisca"
+        
+        //- update your credentials ID after creating credentials for connecting to Docker Hub
+        registryCredential = 'eddie-dockerhub'
+        dockerImage = ''
+    }
+    agent any
+   
+        stages {
+        stage('Pull the repository') {
+            steps {
+                sh 'git clone https://github.com/EddieMC98/Amabisca-Cunor.git'
+                
+            }
+        }
+        stage('Building NetCore && Build and Push Docker Image'){
+            steps{
+             
+             sh "cd Amabisca-Cunor/backend && docker build -t eddiemc98/apiamabisca ." 
+                withDockerRegistry([ credentialsId: "eddie-dockerhub", url: "" ]) {
+                sh 'docker push eddiemc98/apiamabisca:latest'
+               
+                }
+            }
+            
+        }
+        
+        
+        stage('Recreating pods'){
+            steps {
+                withKubeConfig([credentialsId: 'kubernetes-config']) {  
+                  sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
+                  sh 'chmod u+x ./kubectl'  
+                  sh './kubectl delete deployment backend -n testbackend'
+                  sh './kubectl apply -f Amabisca-Cunor/backend/backend.yaml -n testbackend'
+                   
+                 }
+            }
+            
+        }
+        
+    }
+}
